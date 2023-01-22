@@ -1,0 +1,40 @@
+
+<table>
+  <thead>
+    <th>Conta</th>
+    <th>Valor</th>
+    <th>Data</th>
+  </thead>
+  <tbody *ngIf="depositos.length > 0; else listaVazia" >
+    <tr *ngFor="let deposito of depositos">
+      <td>{{deposito?.conta}}</td>
+      <td>{{deposito?.valor}}</td>
+      <td>{{deposito?.data}}</td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #listaVazia>
+  <p>Não há movimentação na conta...</p>
+</ng-template>
+
+
+<p class="bg-primary">Teste Bootstrap</p>
+<p class="text-success">Teste Bootstrap</p>
+
+<h2>Exemplops de Pipes</h2>
+<p> Título: {{livro.titulo | uppercase | lowercase }} </p>
+<p> Classificação: {{livro.rating | number:'1.1-1' }} </p>
+<p> Páginas: {{livro.paginas | number}} </p>
+<p> Preço: {{livro.preco | currency:'BRL':true }}</p>
+<p> Data de Lançamento: {{livro.dataLanc | date:'short'}}</p>
+<p> Livro: {{livro | json}}  </p>
+
+
+
+<!--
+<div *ngFor="let deposito of depositos">
+  <p>Data : {{deposito?.data}}</p>
+  <p>Conta: {{deposito?.conta}}</p>
+  <p>Valor: {{deposito?.valor}}</p>
+</div>
+-->

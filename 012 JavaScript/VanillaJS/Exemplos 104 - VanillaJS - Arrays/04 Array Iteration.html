@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //For... 
+    var array = [1, 2, 4, 6, 7];
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        console.log('element: ' + element);
+    }
+
+
+    //forEach()
+    var numbers = [45, 4, 9, 16, 25];
+    numbers.forEach(myFunction);
+    
+
+    function myFunction(value, index, array) {
+        console.log('forEach: ' + value);
+    }
+    
+
+    //map()
+    var numbers1 = [45, 4, 9, 16, 25];
+    var numbers2 = numbers1.map(myFunction2);
+    console.log('numbers2: ' + numbers2);
+
+    function myFunction2(value, index, array) {
+        return value * 2;
+    }
+
+
+    //filter()
+    var numbers = [45, 4, 9, 16, 25];
+    var over18 = numbers.filter(myFunction3);
+    console.log('over18: ' + over18)
+
+    function myFunction3(value, index, array) {
+        return  value > 18;
+    }
+
+
+    //reduce()
+    var numbers1 = [45, 4, 9, 16, 25];
+    var sum = numbers1.reduce(myFunction4);
+    console.log('reduce sum: ' + sum);
+
+    function myFunction4(total, value, index, array) {
+        return total + value;
+    }
+
+
+    //reduceRight
+    var numbers1 = [45, 4, 9, 16, 25];
+    var sum = numbers1.reduceRight(myFunction5);
+    console.log('reduceRigth ' + sum);
+
+    function myFunction5(total, value, index, array) {
+        return total + value;
+    }
+
+</script>
+
+</html>

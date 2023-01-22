@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <script>
+
+        //1. Passo: Adquirir dados da tela e guardar em Array
+
+        //- Inserindo dados na tabela/tela
+
+        var nomePizza =  ["pequena", "broto", "média"]
+        var tamanhoPizza = [25, 12, 35, 3, 4, 2, 11, 10, 1, 6]
+        var precoPizza = [25.00, 12.00, 35.00]
+        var precoCm2 = [1.5, 2, 1]
+        var relacaoCustoBen = []
+
+        //2. Passo: calcular preço por Cm2 
+
+        //3. Passo: Ordenar o(s) Array(s)
+
+        //---Ordenação de array de Strings
+        console.log(nomePizza)
+
+        var arrayPizza =  nomePizza.sort()
+
+        console.log(arrayPizza)
+
+
+        //Ordenação de array de numericos
+        console.log(tamanhoPizza)
+
+        var arrayTamanhoPizza = tamanhoPizza.sort(function (a, b) {
+            if (a > b) {
+                return 1
+            }
+
+            if (b > a){
+                return -1
+            } 
+
+            return 0 
+        })
+
+        console.log(arrayTamanhoPizza)
+
+
+
+        //4. Passo: Calcular a relação custo benefício percentual pizza-a-pizza
+        
+        //5. Passo: Exibir o relatório na tela 
+        //- limpar as linhas da tabela antes de exibir a nova tabela 
+
+
+    </script>
+
+
+
+</body>
+</html>

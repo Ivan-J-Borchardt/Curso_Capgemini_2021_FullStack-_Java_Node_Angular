@@ -1,0 +1,56 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\011 CSS Bootstrap e Materialize CSS\\Exemplos Bootstrap"
+		},
+		{
+			"path": "Exemplos 101 - VanillaJS - Tipos de Dados"
+		},
+		{
+			"path": "Exemplos 102 - VanillaJS - Estruturas De Seleção"
+		},
+		{
+			"path": "Exemplos 103 - VanillaJS - Estruturas De Repeticao"
+		},
+		{
+			"path": "Exemplos 104 - VanillaJS - Arrays"
+		},
+		{
+			"path": "Exemplos 105 - VanillaJS - Funções"
+		},
+		{
+			"path": "Exemplos 106 - VanillaJS - DOM - Janelas de Confirmação"
+		},
+		{
+			"path": "Exemplos 107 - VanillaJS - DOM - Capturar Elementos HTML - Criar Novos Elementos - Alterar Estilos CSS"
+		},
+		{
+			"path": "Exemplos 108 - VanillaJS - POO Encapsulamento"
+		},
+		{
+			"path": "Exemplos 108 - VanillaJS - POO Herança"
+		},
+		{
+			"path": "Exemplos 109 - VanillaJS - JSON"
+		},
+		{
+			"path": "Exemplos 110 - VanillaJS - API com Ajax"
+		},
+		{
+			"path": "Exemplos 111 - VanillaJS - Callback"
+		},
+		{
+			"path": "Exemplos 112 - VanillaJS - Promises"
+		},
+		{
+			"path": "Exemplos 113 - VanillaJS - Async e Await"
+		},
+		{
+			"path": "Exemplos 114 - VanillaJS - Tratamento de Erro"
+		},
+		{
+			"path": "Exemplos 115 - VanillaJS - Geo Location"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #idMain {
+            background-color: gray;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        #idDiv {
+            background-color: greenyellow;
+            margin: 5px;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <form method="get">
+        <div>
+            <label for="fname">Nome: </label>
+            <input id="fname" type="text" name="nmNome">
+        </div>
+        <div>
+            <label for="lname">Sobrenome: </label>
+            <input id="lname" type="text" name="nmSobrenome">
+        </div>
+        <div>
+            <input id="idSubmit" type="submit">
+        </div>
+    </form>
+
+    <main id="idMain">
+        <p>Dentro do elemento main...</p>
+        <div id="idDiv">
+            <p>Dentro do elemento p</p>
+        </div>
+        <p>Abaixo da div</p>
+    </main>
+
+    <p id="idP01">Este testo tb é clicavel</p>
+    <button id="idBtn01" type="button" onclick="executarTarefa()">Clique me - 01</button>
+    <button id="idBtn02" type="button">Clique me - 02</button>
+    <button id="idBtn03" type="button">Clique me - 03</button>
+    <button id="idBtn04" type="button">Remove Event Listener</button>
+
+    <script>
+        /*
+        Existem vários tipos diferentes de eventos que podem vir a acontecer, por exemplo:
+          -  O usuário clicando com o mouse sobre um certo elemento ou passando o cursor do mouse sobre um certo elemento.
+          -  O usuário pressionando uma tecla do teclado.
+          -  O usuário redimensionando ou fechando a janela do navegador.
+          -  Uma pagina da web terminando de carregar.
+          -  Um formulário sendo enviado.
+          -  Um video sendo reproduzido, interrompido, ou terminando sua reprodução.
+          -  Um erro ocorrendo.
+
+          https://developer.mozilla.org/en-US/docs/Web/Events
+        */
+
+
+        //Event Handler inline - Função chamada diretamente no evento onClick no HTML...
+        function executarTarefa() {
+            console.log("Fui Clicado - 01")
+        }
+
+
+        //Event Handler
+        var botao = document.getElementById("idBtn02")
+
+        botao.onclick = function () {
+            console.log("Fui Clicado - 02")
+
+        }
+
+        //
+        var texto = document.getElementById("idP01")
+
+        texto.onclick = function () {
+            console.log("O texto foi clicado!!!")
+        }
+
+        texto.ondblclick = function () {
+            var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+            texto.style.color = rndCol
+        }
+
+        function random(number) {
+            return Math.floor(Math.random() * (number + 1));
+        }
+
+        //Eventos DOM Nível 2 
+        var botao3 = document.getElementById("idBtn03")
+
+        botao3.addEventListener("mouseover", funcao1)
+
+
+        var botao4 = document.getElementById("idBtn04")
+
+        botao4.addEventListener("click", function () {
+            botao3.removeEventListener("mouseover", funcao1)
+
+            botao3.addEventListener("click", funcao2)
+        })
+
+        function funcao1(event) {
+            console.log("Fui Clicado - 03 - Função 1");
+        }
+        
+        function funcao2(event) {
+            console.log("Fui Clicado - 03 - Função 2");
+        }
+        
+        
+        //Outros conceitos de evento
+        var contMain = document.getElementById("idMain")
+        contMain.onclick = function (event) {
+            
+            //Event Object 
+            console.log(event)
+            
+            //Event.target/ Bubbling
+            console.log("------ Main -------")
+            console.log(event.target)
+            console.log("target.parentNode " + event.target.parentNode.tagName);
+            console.log("target.tagName " + event.target.tagName)
+            console.log("currentTarget.tagName " + event.currentTarget.tagName)
+            
+        }
+        
+        var contDiv = document.getElementById("idDiv")
+        contDiv.onclick = function (event) {
+            //stopPropagation - inibindo bubbling
+            //event.stopPropagation()
+
+            console.log("------ Div -------")
+            console.log(event.target)
+            console.log("target.parentNode " + event.target.parentNode.tagName);
+            console.log("target.tagName " + event.target.tagName)
+            console.log("currentTarget.tagName " + event.currentTarget.tagName)
+             
+        }
+
+
+        
+
+
+        //Previnindo comportamento padrão do FORM
+        var botaoForm = document.getElementById("idSubmit")
+       
+        botaoForm.addEventListener("click", function(event) {
+            event.preventDefault();
+            let form = document.querySelector("form")
+            //form.reset()
+            //form.submit()
+        })
+
+    </script>
+
+</body>
+
+</html>

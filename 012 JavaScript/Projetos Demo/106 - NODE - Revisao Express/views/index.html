@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        //Requisição ajax tipo GET 
+        /*
+        (async function () {
+            var resposta = await fetch("http://localhost:3001/usuario")
+            console.log(await resposta.json());
+        })()
+       
+
+
+        //Requisição ajax tipo POST 
+        (async function () {
+            var resposta = await fetch("http://localhost:3001/usuario", { method: "POST" })
+            console.log(await resposta.json());
+        })()
+
+        //Requisição ajax tipo GET - para rota dinamica
+        (async function () {
+            var codUse = 1235
+            var resposta = await fetch("http://localhost:3001/usuario/" + codUse)
+            console.log(await resposta.json());
+        })()
+        
+        //Requisição ajax tipo GET - passando parametros
+        (async function () {
+            var nomeUser = "IvanJB"
+            var codUser = 1234
+            var resposta = await fetch("http://localhost:3001/usuario?nmUser=" + nomeUser + "&nmCodUser=" + codUser)
+            console.log(await resposta.json());
+        })()
+        */
+
+
+        //Requisição ajax tipo POST 
+        (async function () {
+            var options = { 
+                 method: "POST",  
+                 body: JSON.stringify({nmUser: "XPTO", 
+                                       nmSenha: 1234}), 
+                 headers: {"Content-Type":"application/json" }
+            }
+
+
+            var resposta = await fetch("http://localhost:3001/usuario", options)
+            console.log(await resposta.json());
+        })()
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Urna Eletrônica</title>
+
+    <style>
+        .tamanho-3 {
+            font-size: 35px;
+        }
+
+        .corVermelha {
+            color: red; 
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+    <div>
+        <form action="">
+            <fieldset>
+                <legend>Urna Eletrônica</legend>
+
+                <img src="img/branco.jpg" alt="Nome codCandidato" width="200" id="idFotoCand">
+                <br><br>
+                <input list="idcodCandidatos" id="idInpCand" autocomplete="off" required>
+                <datalist id="idcodCandidatos">
+                    <option value="11">João</option>
+                    <option value="12">José</option>
+                    <option value="13">Maria</option>
+                    <option value="14">Joana</option>
+                </datalist>
+                <br><br>
+                <output class="tamanho-3" id="idNomeCan" name="nmNomeCan"></output>
+                <br><br>
+                <input type="button" onclick="confirmarVoto()"  value="Confirmar">
+                <input type="button" onclick="limparTela()"     value="Cancelar">
+                <input type="button" onclick="votarBranco()"    value="Branco">
+                <input type="button" onclick="atualizarTela()"  value="Tela">
+                <input type="button" onclick="testarCssViaJs()"  value="Testar CSS">
+
+            </fieldset>
+        </form>
+    </div>
+
+    <script>
+        var votosCand11 = 0
+        var votosCand12 = 0
+        var votosCand13 = 0
+        var votosCand14 = 0
+        var votosCandBranco = 0
+        var votosCandNullo = 0
+        /*
+           Confirmação de voto 
+        */
+        function confirmarVoto() {
+
+            let codCandidato = document.querySelector("#idInpCand").value
+            
+
+            switch (codCandidato) {
+                case "11":
+                    votosCand11++   
+                    break;
+                case "12":
+                    votosCand12++ 
+                    break;
+                case "13":
+                    votosCand13++ 
+                    break;
+                case "14":
+                    votosCand14++ 
+                    break;
+
+                default:
+
+                    if (codCandidato == "") {
+                        votosCandBranco++
+                    } else {
+                        votosCandNullo++ 
+                    }
+                    break;
+            }
+
+            limparTela()
+        }
+        /*
+           Confirmação de voto em Branco  
+        */
+        function votarBranco(){
+            votosCandBranco++
+            limparTela()
+        }
+
+        /*
+           Atualização dos dados da tela 
+        */
+        function atualizarTela(){
+            let candidato
+            let codCandidato = document.querySelector("#idInpCand").value
+
+
+            switch (codCandidato) {
+                case "11":
+                    candidato = "João"
+          
+                    break;
+                case "12":
+                    candidato = "José"
+              
+                    break;
+                case "13":
+                    candidato = "Maria"
+                 
+                    break;
+                case "14":
+                    candidato = "Joana"
+                 
+                    break;
+
+                default:
+
+                    if (codCandidato == "") {
+                        candidato = "Voto em Branco"
+                   
+                    } else {
+                        candidato = "Voto Nullo"
+                        
+                    }
+                    break;
+            }
+            
+            document.getElementById("idFotoCand").src = "img/" + candidato + ".jpg"
+            document.getElementById("idNomeCan").value = candidato
+        }
+
+        function limparTela(){
+            document.getElementById("idNomeCan").value = ""
+            document.getElementById("idFotoCand").src = "img/branco.jpg"
+            document.querySelector("#idInpCand").value = ""
+        }
+
+        function testarCssViaJs(){
+            document.getElementById("idNomeCan").className = "corVermelha"
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

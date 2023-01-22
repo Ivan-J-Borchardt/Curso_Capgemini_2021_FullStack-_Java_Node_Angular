@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="idUserId" placeholder="UserId"><br><br>
+    <input type="text" id="idPass" placeholder="password"><br><br>
+    <button id="idBtnLogin">Login</button>
+
+    <script>
+        var btn = document.getElementById("idBtnLogin")
+        btn.onclick = async function() {
+         
+            var options = { 
+                 method: "POST",  
+                 body: JSON.stringify({user: document.getElementById("idUserId").value, 
+                                       pass: Number(document.getElementById("idPass").value)}), 
+                 headers: {"Content-Type":"application/json",
+                           "x-ccess-token": aut}
+            }
+
+
+            var resposta = await fetch("http://localhost:3001/login", options)
+            var autenticacao = await resposta.json()
+            //guardar o token  no localStorage
+            localStorage.removeItem("token")
+            localStorage.setItem("token", autenticacao.token)
+
+
+            //buscar o token do localStorage (isso será feito na 
+            //tela index.html quando for requisitar uma rota com controle de acesso )
+            console.log(autenticacao);
+            var aut = localStorage.getItem("token")
+            console.log(aut);
+        
+
+            
+        }
+
+
+    </script>
+
+</body>
+</html>

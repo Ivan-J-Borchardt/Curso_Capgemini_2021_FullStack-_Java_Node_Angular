@@ -1,0 +1,108 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : Selection structures (If/else ...)
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Exemplo Estruturas de Seleção</title>
+    </head>
+    <body>
+        <header>
+            <h1>Exemplos de Estruturas de Seleção</h1>
+        </header>
+        <main>
+            <Section>
+                <div>
+
+
+
+                </div>
+            </Section>
+
+        </main>
+
+        <script>
+            //Estrutura de seleção simples 
+            var num = 0; 
+            if (num > 23) {
+                console.log(num + " é maior que 23");
+            }
+
+            num = 11; 
+            //Estrutura de seleção composta
+            if (num < 10 || (num > 23 && num < 50)) {
+                console.log("Entrou no IF");
+            } else {
+                console.log("Entrou no ELSE");
+            }
+
+            var idade = 20;
+            //Estrutura de seleção encadeada
+            if (num < 10 || (num > 23 && num < 50)) {
+                if (idade > 56) {
+                    console.log("entrou if");
+                }
+            } else {
+                console.log("Entrou no ELSE");
+            }
+             
+            //estrutura de seleção encadeada
+            console.log("--------------------------------------")
+            var menu = 5; 
+
+            if (menu == 0) {
+                console.log("if menu 0");
+            }else if(menu == 1){
+                console.log("if menu 1");
+            }else if(menu == 2){
+                console.log("if menu 2");
+            }else{ 
+                console.log("if Menu inválido!");
+            }
+
+            //Estrutura de seleção Switch-Case (Caso)
+            switch (menu) {
+                case  0:
+                    console.log("menu 0");
+                    break;
+
+                case  1:
+                    console.log("menu 1");
+                    break;
+
+                case  2:
+                    console.log("menu 2");
+                    break;    
+            
+                default:
+                    console.log("Menu inválido!");
+                    break;
+            }
+
+
+            //Estrutura de seleção ternário 
+            var opcao; 
+           /*
+            if (menu == 0 ) {
+                opcao = "verdadeiro";
+            } else {
+                opcao = "falso";
+            }
+            */
+
+            opcao = (menu == 0)? "verdadeiro" : "falso"; 
+
+            console.log("resultado do ternario " + opcao);
+
+
+        </script>
+    </body>
+</html>

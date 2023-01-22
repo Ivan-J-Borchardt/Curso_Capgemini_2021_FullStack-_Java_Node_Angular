@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="idNome" placeholder="Nome Completo">
+        <br><br>
+        <input type="number" id="idAnoNasc" placeholder="Ano de Nascimento">
+        <br><br>
+        <label for="idIdade" id="idLbNome"></label><br>
+        <input type="text" id="idIdade">
+        <br><br>
+        <input type="radio" id="idMasc" name="nmSexo" checked>
+        <label for="idMasc">Masculino</label>
+        <br><br>
+        <input type="radio" id="idFem" name="nmSexo">
+        <label for="idFem">Feminino</label>
+        <br><br>
+        <output id="idOut"></output>
+        <br><br>
+        <button type="button" onclick="pegarDadosTela()">Calcular Idade</button>
+    </div>
+    
+    <script>
+        function pegarDadosTela(){
+            var nome = document.querySelector("#idNome").value
+            var anoNasc = document.querySelector("#idAnoNasc").value
+
+            var feminino = document.querySelector("#idFem").checked
+            var masculino = document.querySelector("#idMasc").checked
+
+            var idade = 2021 - anoNasc
+
+            document.querySelector("#idLbNome").innerHTML = nome
+            document.querySelector("#idIdade").value = idade
+
+
+            document.querySelector("#idOut").innerHTML = "Nome: " + nome + " - Idade: " + idade
+        }
+    </script>
+
+</body>
+</html>

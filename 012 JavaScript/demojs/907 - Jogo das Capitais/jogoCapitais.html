@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz dos Estados</title>
+    <style>
+        div {
+            margin: 15px;
+            padding: 8px;
+            border: 1px;
+            border-style: solid;
+            display: block;
+        }
+
+        .lateral {
+            width: 30vw;
+        }
+
+        .meio {
+            width: 40vw;
+        }
+
+        .fadeOut {
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        #idPrincipal {
+            display: flex;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div id="idPrincipal">
+        <div class="lateral">
+
+        </div>
+        <div class="meio">
+
+            <div id="idTelaAddJog">
+                <h3>Cadastro de Jogadores</h3>
+                <br>
+                <label for="idJogador">Jogador</label>
+                <br>
+                <input type="text" id="idJogador" placeholder="Nome Completo">
+                <br><br>
+                <button type="button" id="btnAddJog">Add Jogador</button>
+                <output id="idOutQtdJog"></output>
+
+            </div>
+
+            <div id="idTelaJogo" class="oculto">
+                <h3>Quiz das Capitais</h3>
+                <br>
+                <output id="idOutJogador"></output>
+                <br>
+                <output id="idOutPergunta"></output>
+                <br>
+                <input type="text" id="idResposta" placeholder="Resposta">
+                <br><br>
+                <button type="button" id="btnNovaRodada">Nova Rodada</button>
+                <button type="button" id="btnResponder" disabled>Responder</button>
+                <button type="button" id="btnFinalizar" disabled>Finalizar</button>
+            </div>
+
+            <div id="idTelaResul" class="oculto">
+                <h3>Resultado Final</h3>
+                
+
+            </div>
+
+        </div>
+        <div class="lateral">
+
+        </div>
+    </div>
+
+    <script>
+        var indJogador = 0
+        var indEstado = 0
+
+
+        var jogadores = []
+        var pontos = []
+
+        var capitais = [
+            "Rio Branco",
+            "Maceió",
+            "Macapá",
+            "Manaus",
+            "Salvador",
+            "Fortaleza",
+            "Brasília",
+            "Vitória",
+            "Goiânia",
+            "São Luís",
+            "Cuiabá",
+            "Campo Grande",
+            "Belo Horizonte",
+            "Belém",
+            "João Pessoa",
+            "Curitiba",
+            "Recife",
+            "Teresina",
+            "Rio de Janeiro",
+            "Natal",
+            "Porto Alegre",
+            "Porto Velho",
+            "Boa Vista",
+            "Florianópolis",
+            "São Paulo",
+            "Aracaju",
+            "Palmas"
+        ]
+
+        var estados = [
+            "Acre",
+            "Alagoas",
+            "Amapá",
+            "Amazonas",
+            "Bahia",
+            "Ceará",
+            "Distrito Federal",
+            "Espírito Santo",
+            "Goiás",
+            "Maranhão",
+            "Mato Grosso",
+            "Mato Grosso do Sul",
+            "Minas Gerais",
+            "Pará",
+            "Paraíba",
+            "Paraná",
+            "Pernambuco",
+            "Piauí",
+            "Rio de Janeiro",
+            "Rio Grande do Norte",
+            "Rio Grande do Sul",
+            "Rondônia",
+            "Roraima",
+            "Santa Catarina",
+            "São Paulo",
+            "Sergipe",
+            "Tocantins"
+        ]
+
+        var btnAddJog = document.getElementById("btnAddJog")
+
+        btnAddJog.onclick = function () {
+            let jogador = document.getElementById("idJogador")
+
+            if (jogador.value == "") {
+                alert("Informe o nome do jogador!")
+
+            } else {
+                jogadores.push(jogador.value)
+                pontos.push(0)
+                document.getElementById("idOutQtdJog").value = jogadores.length
+                jogador.value = ""
+                if (jogadores.length == 4) {
+                    jogador.disabled = true
+                    btnAddJog.disabled = true
+                    iniciarJogo()
+                }
+            }
+            jogador.focus()
+
+
+        }
+
+        function iniciarJogo() {
+            let telaCadJogadores = document.getElementById("idTelaAddJog")
+            let telaJogo = document.getElementById("idTelaJogo")
+            telaCadJogadores.classList.add("fadeOut")
+
+            setTimeout(function (params) {
+                telaCadJogadores.classList.add("oculto")
+                telaJogo.classList.remove("oculto")
+            }, 500)
+        }
+
+        var btnNovaRodada = document.getElementById("btnNovaRodada")
+        var btnResponder = document.getElementById("btnResponder")
+        var btnFinalizar = document.getElementById("btnFinalizar")
+
+        btnNovaRodada.onclick = function () {
+            btnResponder.disabled = false
+            btnNovaRodada.disabled = true
+            btnFinalizar.disabled = true
+            montaNovaQuestao()
+        }
+
+        btnResponder.onclick = function () {
+            console.log("clicou");
+            let resposta = document.getElementById("idResposta")
+            if (resposta.value == capitais[indEstado]) {
+                pontos[indJogador]++
+
+            }
+            resposta.value = ""
+            indJogador++
+            if (indJogador == jogadores.length) {
+                indJogador = 0
+                btnResponder.disabled = true
+                btnNovaRodada.disabled = false
+                btnFinalizar.disabled = false
+                document.getElementById("idOutJogador").value = ""
+                document.getElementById("idOutPergunta").value = ""
+            } else {
+                montaNovaQuestao()
+            }
+        }
+
+        btnFinalizar.onclick = function () {
+            let telaJogo = document.getElementById("idTelaJogo")
+            let telaResul = document.getElementById("idTelaResul")
+            telaJogo.classList.add("fadeOut")
+
+            setTimeout(function () {
+                telaJogo.classList.add("oculto")
+                telaResul.classList.remove("oculto")
+                exibirResultado()
+            }, 500)
+
+        }
+
+        function exibirResultado() {
+            ordenarResultados()
+            let telaResult = document.getElementById("idTelaResul")
+            
+            for (let i = 0; i < jogadores.length; i++) {
+                let tagP = document.createElement("p")
+                tagP.innerText = (i + 1) + ". colocado: "+  jogadores[i] + " - " + pontos[i]
+                telaResult.appendChild(tagP)                    
+            }
+            
+        }
+
+        function ordenarResultados(){
+
+            let trocou = true
+            while(trocou){
+                trocou = false
+                for (let i = 0; i < jogadores.length - 1; i++) {
+                    if (pontos[i] < pontos[i + 1]) {
+                        let tempPontos = pontos[i]
+                        pontos[i] = pontos[i + 1]
+                        pontos[i + 1] = tempPontos
+                        let tempJog = jogadores[i]
+                        jogadores[i] = jogadores[i + 1]
+                        jogadores[i + 1] = tempJog
+                        trocou = true
+                    }
+                    
+                }
+            }
+
+
+        }
+
+        function montaNovaQuestao() {
+            document.getElementById("idOutJogador").value = jogadores[indJogador]
+            indEstado = sorteiaEstado()
+            document.getElementById("idOutPergunta").value = estados[indEstado]
+        }
+
+
+        function sorteiaEstado() {
+            return (Math.random() * 26).toFixed()
+        }
+
+    </script>
+
+</body>
+
+</html>

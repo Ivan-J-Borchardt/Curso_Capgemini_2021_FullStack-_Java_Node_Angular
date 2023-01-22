@@ -1,0 +1,51 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : Arrays
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>''
+<script>
+
+
+    //Destructuring: 
+    //--------------
+    // A sintaxe de atribuição via desestruturação (destructuring assignment) é uma expressão 
+    // JavaScript que possibilita extrair dados de arrays ou objetos em variáveis distintas. 
+    
+    //https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Atribuicao_via_desestruturacao     
+
+    var a, b, rest;
+    [a, b] = [1, 2];
+    console.log(a); // 1
+    console.log(b); // 2
+
+    [a, b, ...rest] = [1, 2, 3, 4, 5];
+    console.log(a); // 1
+    console.log(b); // 2
+    console.log(rest); // [3, 4, 5]
+
+    ({ a, b } = { a: 1, b: 2 });
+    console.log(a); // 1
+    console.log(b); // 2
+
+    // ES2016 - não implementado em Firefox 47a01
+    ({ a, b, ...rest } = { a: 1, b: 2, c: 3, d: 4 });
+
+
+</script>
+
+</html>

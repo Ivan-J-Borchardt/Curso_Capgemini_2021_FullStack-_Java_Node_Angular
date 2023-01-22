@@ -1,0 +1,159 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : JS Data Type
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tipos de Dados e Casting</title>
+    </head>
+    <body>
+        <header>
+            <h1>Tipos de Dados e Casting</h1>
+        </header>
+        <main>
+            <section>
+
+                <div>
+                    <fieldset>
+                        <Legend>Tipos de Dados e Casting</Legend>
+                        
+
+                        <input type="submit" onclick="executar()">    
+                    </fieldset>
+                </div>
+            </section>
+        </main>
+        <Script>
+            function executar(){
+
+                /*
+                    5 Data Types (Tipos de Dados)
+                    ----------------
+                    - string 
+                    - number
+                    - boolean
+                    - Object
+                    - function
+
+                    2 Special Data Types (Tipos de dados especiais)
+                    --------------------------
+                    - null (Objetos não inicializados)
+                    - undefined (variaveis primitivas não inicializadas)
+
+
+                    6 Object Types(Tipos de Objetos)
+                    ------------------
+                    - Object
+                    - Date
+                    - Array
+                    - String
+                    - Number
+                    - Boolean
+
+                    Operadores para testar o tipo da variável
+                    ------------------------------------------
+                    typeOf 
+                    isNaN (Not a Numeric)
+
+                    2 Formas de fazer conversão de tipos
+                    ------------------------------------
+                    - Conversão Automática (conversão implicita)
+                    ---------------------------------------------
+                        -> 5 + null   = 5  (conversão para number)
+                        -> "5" + null = "5null" (conversão para string)
+                        -> "5" + 2    = "52" (conversão para String)
+                        -> "5" - 2    = 3 (conversão para number)
+                        -> "5" * "2"  = 10 (conversão para number)
+                    
+                    - Conversão usando funções do JavaScript (conversão explicita)
+                    --------------------------------------------
+                    Para String 
+                    ------------
+                         - Date to String 
+                         - Boolean to String
+                         - Number to String
+
+                            String(123)
+                            String(x)
+
+                            x.toString
+
+                    Para Number
+                    ------------
+                        - String to Number
+                            
+                            Number("3.14")
+
+                            parseFloat("10.5")
+                            parseInt("10")
+
+                            var y = "5"
+                            var x = + y
+
+                */
+
+                //Conversão de String para number
+                //--------------------------------
+                // 1. Forma
+                var y = "5"; 
+                var x = + y; 
+
+                console.log("tipo de x: " + x + "  " + typeof(x)); 
+  
+                // 2. Forma 
+
+                var w = Number(y); 
+                console.log("tipo de w: " + w + " " + typeof(w)); 
+               
+                console.log("true   to number  : " + Number(true)); 
+                console.log("false  to number  : " + Number(false)); 
+                console.log("98 97  to number  : " + Number("98 97")); 
+                console.log("espaço to number  : " + Number(" ")); 
+                console.log("vazio  to number  : " + Number("")); 
+
+                // 3. Forma 
+
+                console.log("paseFloat('10.5') " + parseFloat("10.5"));
+                console.log("paseFloat('10')   " + parseFloat("10"));
+
+                console.log("paseInt('10.5')   " + parseInt("10.5"));
+                console.log("paseInt('10')     " + parseInt("10"));
+                
+       
+                //Conversão de Number para String
+                //-------------------------------
+                let salBase = 1000.00; 
+                let gratif;
+                let salBruto;
+                let salLiq;
+                let ir; 
+
+                console.log(typeof(salBase));
+
+                //salBase = String(salBase); 
+                salBase = salBase.toString(); 
+
+                console.log(typeof(salBase));
+
+                //outros métodos que retornam Strings
+                //----------------------------------------
+
+                var h = 75.213456789;
+                console.log("h.toFixed(2)       " + h.toFixed(2)); //retorna o numero formatado com 2 casas decimais 
+
+                console.log("h.toExponential(3) " + h.toExponential(3)); 
+
+                console.log("h.toPrecision(5)   " + h.toPrecision(5));
+
+            }
+
+        </Script>
+    </body>
+</html>

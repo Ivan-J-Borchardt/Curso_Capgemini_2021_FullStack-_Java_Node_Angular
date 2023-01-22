@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //Anatomia de uma função - Exemplos simples...
+        function aniversario(idade) {
+            return (idade + 1)
+        }
+
+        var novaIdade = aniversario(25)
+        console.log(novaIdade)
+
+
+        var pesoIdeal2 = function (genero, altura) {
+            if (genero == "f") {
+                pesoIdeal = 10
+            } else {
+                pesoIdeal = 12
+            }
+            return pesoIdeal
+        }
+
+
+        console.log("Peso ideal: " + pesoIdeal2("f", 1.83));
+
+        //Passagem de parametros (por valor e por referência)
+
+        //teste de passagem de parametro por valor
+        var usuario = "XPTO"
+
+        testeParametroValor(usuario)
+        console.log(usuario);
+
+        //teste de passagem de parametro por referencia
+        var cadUser = {
+            nome: "user1",
+            idade: 12
+        }
+
+        testeParametroReferencia(cadUser)
+        console.log(cadUser);
+
+        //teste de passagem por valor...
+        testeParametroReferencia2(cadUser.nome)
+        console.log(cadUser)
+
+
+        //Passagem de parametros por valor
+        function testeParametroValor(user) {
+
+            console.log(user)
+            user = "XPTO123"
+        }
+
+        //Passagem de parametros por referencia
+        function testeParametroReferencia(cadUser2) {
+            console.log(cadUser2)
+            cadUser2.nome = "User123"
+        }
+
+        //teste de passagem por valor
+        function testeParametroReferencia2(nome) {
+            console.log(nome)
+            nome = "User567"
+        }
+
+        //Funcao Anonima
+        var pesoIdeal = function(genero, altura) {
+            let pesoIdeal = 0; 
+            if (genero == "F") {
+                pesoIdeal = (62.1 * altura) - 44.7; //Peso Ideal feminino
+            }else if (genero == "M") {
+                pesoIdeal = (72.7 * altura) - 58;   //Peso Ideal Masculino
+            }
+            return pesoIdeal;
+        }
+
+        console.log(pesoIdeal("M", 1.82));
+
+
+        //Funcao seta (Arrow Function) 
+        var pesoIdeal = (genero, altura) => {
+            let pesoIdeal = 0; 
+            if (genero == "F") {
+                pesoIdeal = (62.1 * altura) - 44.7; //Peso Ideal feminino
+            }else if (genero == "M") {
+                pesoIdeal = (72.7 * altura) - 58;   //Peso Ideal Masculino
+            }
+            return pesoIdeal;
+        }
+
+        var pesoIdeal2 = (genero, altura) => console.log("Chamou a arrow Function");
+        
+        console.log(pesoIdeal("M", 1.82));
+
+
+        //Função auto-invocada
+        (function(){console.log("Função auto-invocada")}())
+
+    </script>
+</body>
+
+</html>

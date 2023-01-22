@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <label for="idSalario">Salario</label>
+    <input type="number" id="idSalario" step="0.01">
+    <br><br>
+    <output id="idOut"></output>
+    <br><br>
+    <button id="idBtn">Reajustar</button>
+
+    <script>
+
+        var btnReajuste = document.getElementById("idBtn")
+
+        btnReajuste.onclick = function() {
+            let salarioAtual = Number(document.getElementById("idSalario").value)
+            let salarioNovo
+
+            if (salarioAtual <= 600.00) {
+                salarioNovo = salarioAtual * 1.35
+            } else if (salarioAtual >= 600.01 && salarioAtual <= 1150.00) {
+                salarioNovo = salarioAtual * 1.25
+            } else if (salarioAtual >= 1150.01 && salarioAtual <= 2400.00){
+                salarioNovo = salarioAtual * 1.20
+            } else if (salarioAtual >= 2400.01 && salarioAtual <= 3560.00){
+                salarioNovo = salarioAtual * 1.15
+            } else {
+                salarioNovo = salarioAtual * 1.10
+            }
+                
+            document.getElementById("idOut").value = "Novo Salário = " + salarioNovo
+            
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

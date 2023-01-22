@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        var array = [2, 5, 0, 10, 35, 3, 9, 7]
+
+        var arrayOrdenado = ordenar(array, "Decre")
+
+        console.log(arrayOrdenado);
+
+
+        function ordenar(array, ordem) {
+            
+            if (ordem == "Cres") {
+                return ordenarCrescente(array)
+            } else if (ordem == "Decre"){
+                return ordenarDecrescente(array)
+            } 
+        
+        }
+
+        function ordenarCrescente(array) {
+            var trocou = true
+    
+            while(trocou){
+    
+                trocou = false
+                for (let i = 0; i < (array.length - 1); i++) {
+                    
+                    if (array[i] > array[i + 1]) {
+                        let aux = array[i]
+                        array[i] = array[i + 1]
+                        array[i + 1] = aux
+                        trocou = true
+                    }
+                    /*
+                        i = 0    array.length = 8
+                        aux = 5 
+        
+                    */
+                }
+            }
+            
+            return array
+        }
+
+
+        function ordenarDecrescente(array) {
+            var trocou = true
+    
+            while(trocou){
+    
+                trocou = false
+                for (let i = 0; i < (array.length - 1); i++) {
+                    
+                    if (array[i] < array[i + 1]) {
+                        let aux = array[i]
+                        array[i] = array[i + 1]
+                        array[i + 1] = aux
+                        trocou = true
+                    }
+                    /*
+                        i = 0    array.length = 8
+                        aux = 5 
+        
+                    */
+                }
+            }
+            
+            return array
+        }
+
+
+
+    </script>
+
+</body>
+</html>

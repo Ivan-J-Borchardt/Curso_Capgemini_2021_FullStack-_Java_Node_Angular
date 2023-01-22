@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        console.log("Primeira Ação!!!");
+
+        setTimeout(function () {
+            console.log("segunda  Ação!!!");
+        }, 1000);
+
+        console.log("Terceira Ação!!!");
+
+        buscaCEP()
+
+        console.log("Quinta Ação!!!");
+
+
+        function buscaCEP() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "https://viacep.com.br/ws/89107000/json/");
+
+            xhr.addEventListener("load", function () {
+                var resposta = xhr.responseText;
+                console.log(resposta);
+
+            });
+
+            xhr.send();
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

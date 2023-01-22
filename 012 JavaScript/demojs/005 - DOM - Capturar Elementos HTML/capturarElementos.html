@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <!-- Campo de texto  -->
+        <label for="idNome">Nome: </label><br>
+        <input type="text" id="idNome" name="nmNome">
+        <br><br>
+
+        <!-- Radio Button -->
+        <input type="radio" id="idMasc" name="nmSexo" value="Masculino" checked>
+        <label for="idMasc">Masculino</label>
+        <br>
+        <input type="radio" id="idFem" name="nmSexo" value="Feminino">
+        <label for="idFem">Feminino</label>
+        <br><br>
+
+        <!-- Checkbox -->
+        <input type="checkbox" id="idOp1" name="nmOp1" class="chx">
+        <label for="idOp1">Op1</label>
+        <br>
+        <input type="checkbox" id="idOp2" name="nmOp2" class="chx">
+        <label for="idOp2">Op2</label>
+        <br><br>
+
+        <!-- Seletor de arquivos -->
+        <label for="idFile">Arquivo:</label><br>
+        <input type="file" id="idFile" name="nmFile">
+        <br><br>
+
+        <!-- Lista de dados -->
+        <label for="idListNav">Navegadores:</label>
+        <input list="navegadores" id="idListNav" minlength="2" autocomplete="off">
+        <datalist id="navegadores">
+            <option value="Internet Explorer">Internet</option>
+            <option value="Firefox">
+            <option value="Chrome">CH</option>
+            <option value="Opera">OP</option>
+            <option value="Safari">SA</option>
+            <option value="Edge">ED</option>
+        </datalist>
+        <br><br>
+
+        <!-- Caixa de seleção (lista)-->
+        <label for="idSelect">Selecione uma Marca:</label>
+        <select name="nmSelect" id="idSelect">
+            <option value="" selected></option>
+            <option value="1">Volvo</option>
+            <option value="2">FIAT</option>
+            <option value="Mercedez">BENZ</option>
+            <option value="Audi">AUD</option>
+            <option value="Ford">FOR</option>
+        </select>
+        <br><br>
+
+        <!-- Caixa de texto de multiplas linhas -->
+        <label for="idTextArea">Digite aqui sua Pertunta: </label><br>
+        <textarea name="nmTextArea" id="idTextArea" cols="30" rows="10" maxlength="100" minlength="10"></textarea><br>
+        <output name="nmOutTextArea" for="idTextArea">0</output><br>
+
+        <button type="button" onclick="rodarJS()">Rodar JS</button>
+    </div>
+    <Script>
+        function rodarJS(){
+            //caixa de texto
+            var nome = document.querySelector("#idNome").value;
+            var nome1 = document.querySelectorAll(".chx")  
+            console.log(nome1)
+
+            var nome2 = document.getElementById("idNome").value
+            console.log(nome2)
+    
+            //Radio Button 
+            var masc = document.querySelector("#idMasc").checked;
+            var fem  = document.querySelector("#idFem").checked;
+    
+            var radiosSexo = document.getElementsByName("nmSexo");
+            for (let index = 0; index < radiosSexo.length; index++) {
+                if (radiosSexo[index].checked) {
+                    console.log("Sexo: " + radiosSexo[index].value)
+                }            
+            }
+
+            //var link1 = document.querySelector("a:visited")
+            var sexo = document.querySelector("input[name=nmSexo]:checked").value
+            console.log("sexo--: " + sexo)
+
+            //Checkbox
+            var op1 = document.querySelector("#idOp1").checked
+            var op2 = document.querySelector("#idOp2").checked
+            console.log("Op1: ", op1, "Op2: ", op2)
+
+
+            //Seletor de arquivos
+            var file = document.querySelector("#idFile").files[0]
+            console.log(file)
+
+            
+            //DataList
+            var opList = document.querySelector("#idListNav").value
+            console.log("opList " + opList)
+
+            //Select 
+            var itemSelect = document.querySelector("#idSelect")
+            console.log(itemSelect.value)
+            console.log(itemSelect.options[itemSelect.selectedIndex].value) //.text)
+
+
+            //Textarea
+            document.querySelector("#idTextArea").value = "texto teste"
+            document.querySelector("#idTextArea").innerHTML = "texto teste"
+            var texto = document.querySelector("#idTextArea").value
+            console.log(texto)
+
+        }
+
+
+
+    </Script>
+</body>
+
+
+
+</html>

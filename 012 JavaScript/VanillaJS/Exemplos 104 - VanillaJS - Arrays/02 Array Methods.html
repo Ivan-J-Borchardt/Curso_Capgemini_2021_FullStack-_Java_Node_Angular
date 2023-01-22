@@ -1,0 +1,142 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : Arrays
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>''
+<script>
+    var carros = ['gol', 'Ka', 'celta', 12]; //Observe que o Array permite guardar multiplos tipos de dados 
+
+    //Funções para trabalhar com Arrays
+    //=========================================
+    carros[1] = "Fiesta";
+
+    console.log('0 - Tamanho do array: ' + carros.length);
+
+    carros.push('fusca'); //Adiciona novo item no final do array 
+    console.log('1 - após push :' + carros);
+
+    carros.unshift('ferrari'); //Adiciona novo item no inicio do array 
+    console.log('2 - após unshift :' + carros);
+
+    var carro = carros.pop(); //remove o último elemento do array
+    console.log('3 - após o pop - Carro extraído do Array: ' + carro + ' carros[]:  ' + carros);
+
+    var carro2 = carros.shift(); //remove o primeiro elemento do Array
+    console.log('4 - após do shift - Carro extraído do Array ' + carro + 'carros[]: ' + carros);
+
+    console.log("5 - Carros impresso com toString: " + carros.toString()); //traz o texto do conteúdo
+
+    console.log("6 - Carros impresso com join: " + carros.join('-')); //traz os itens separados por hífen 
+
+    carros.sort();
+    console.log('7 - Carros após sort: ' + carros);
+
+    carros.reverse();
+    console.log('8 - Carros após reverse: ' + carros);
+
+    delete carros[1]; //Altera o segundo elemento para undefined
+    console.log('9 - carro[1]: ' + carros[1] + ' carros[]: ' + carros);
+
+
+    //Filas e Pilhas
+    //---------------
+    //No javaScript é possível usar arrays para construir Filas e Pilhas. 
+    //Fila - uma fila é uma estrutura de dados baseada no principio FIFO (First in, First Out), nesta estrutura 
+    //       o primeiro elemento colocado no array será o primeiro a ser consumido; 
+    //     - Para construir uma Fila utilize o método push() para inserir elementos e shift() para retirar os elementos 
+    //       do array; 
+    //
+    //Pilha - uma pilha é uma estrutura de dados baseada no principio LIFO (Last in, First Out), o último 
+    //       elemento a entrar no array será o primeiro a ser consumido; 
+    //      - para criar uma pilha, utilize o método push() para inserir elementos e pop() para retirar os elementos 
+    //      do array;  
+
+
+    //Splice 
+    //--------------
+
+    //Adicionando novos elementos no Array
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.splice(2, 0, "Lemon", "Kiwi");
+    console.log("10 - Após Splice: " + fruits);
+    //The first parameter (2) defines the position where new elements should be added (spliced in).
+    //The second parameter (0) defines how many elements should be removed.
+    //The rest of the parameters ("Lemon" , "Kiwi") define the new elements to be added.
+
+
+    //Substituindo elementos 
+    var fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+    var deletedFruits = fruits2.splice(2, 2, "Lemon", "Kiwi");
+    console.log('11 - Após o slice 2: ' + fruits2);
+    console.log('12 - Array com itens removidos: ' + deletedFruits);
+
+    //Removendo elementos
+    var fruits3 = ["Banana", "Orange", "Apple", "Mango"];
+    fruits3.splice(0, 1);        // Removes the first element of fruits
+    console.log('13 - Após retirar um elemento: ' + fruits3);
+
+
+    //Merging (Concatenating) Arrays 
+    //--------------------------------
+    //** o método concat() gera um novo array sem alterar o conteúdo dos arrays originais    
+
+    //Concatenando dois Arrays 
+    var myGirls = ["Cecilie", "Lone"];
+    var myBoys = ["Emil", "Tobias", "Linus"];
+    var myChildren = myGirls.concat(myBoys);   // Concatenates (joins) myGirls and myBoys
+    console.log('14 - Após concatenar dois arrays: ' + myChildren);
+
+    //Concatenando três Arrays
+    var arr1 = ["Cecilie", "Lone"];
+    var arr2 = ["Emil", "Tobias", "Linus"];
+    var arr3 = ["Robin", "Morgan"];
+    var myChildren2 = arr1.concat(arr2, arr3);   // Concatenates arr1 with arr2 and arr3
+    console.log('15 - Após concatenar três arrays: ' + myChildren2);
+
+    //Concatenando Array com valor 
+    var arr1 = ["Emil", "Tobias", "Linus"];
+    var myChildren3 = arr1.concat("Peter");
+    console.log('16 - Após concatenar array com valor: ' + myChildren3);
+
+
+    //Concatenação com destructuring 
+    var num = [1, 2, 3, 4];
+    num = [...num, 5];
+    console.log('17 - Num concatenado ' + num);
+
+    num2 = [6, 7, 8];
+    num = [...num, num2];
+    console.log('18 - Num concatenado ' + num);
+
+
+    //Fatiando o array 
+    //------------------------------
+
+    //retornando todos os elementos a partir da posição 1
+    var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+    var citrus = fruits.slice(1);
+    console.log('19 - Após slice() ' + citrus);
+
+    //retornando os elementos entre as posições 1 e 3 (sem incluir os limites)
+    var fruits2 = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+    var citrus2 = fruits2.slice(1, 3);
+    console.log('20 - Após slice2: '  + citrus2);
+
+</script>
+
+</html>

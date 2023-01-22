@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperatura Média</title>
+    <style>
+        .atencao {
+            color: red;
+        }
+
+        .normal {
+            color : black; 
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div>
+        <label for="idDia">Dia: </label>
+        <input type="number" id="idDia">
+        <br><br>
+        <output id="idOut">Resultado: </output>
+        <br><br>
+        <button type="button" onclick="testarTemp()">Verificar</button>
+    </div>
+
+    <script>
+
+        var temperaturas = [10, 12.5, 4.5, 15, 23, 10, 12.5, 4.5, 15, 23, 10, 12.5, 4.5, 15, 23, 10, 12.5, 4.5, 15, 23,10, 12.5, 4.5, 15, 23, 10, 12.5, 4.5, 15, 23]
+        var somaTemperaturas = 0
+        var media = 0
+
+
+        //Somatório de temperaturas
+        for (let i = 0; i < temperaturas.length; i++) {
+            somaTemperaturas = somaTemperaturas + temperaturas[i]
+        }
+
+        //Calculo da média de Temperaturas 
+        media = somaTemperaturas/temperaturas.length
+
+
+        //Aquisição do dia digitado 
+        function testarTemp() {
+            let dia = document.getElementById("idDia").value
+            let msn
+            let msnResultado = document.getElementById("idOut")
+
+            if (dia < 1 || dia > 30) {
+                msn = "Dia inválido, digite um dia entre 1 e 30..."
+                msnResultado.classList.remove("normal")
+                msnResultado.classList.add("atencao")
+           
+            }else{
+                
+                let index = dia - 1    
+                
+                if (temperaturas[index] < media) {
+                    msn = "A temperatura (" + temperaturas[index] + ") está abaixo da média (" + media + ")"
+               
+                } else if (temperaturas[index] > media) {
+                    msn = "A temperatura (" + temperaturas[index] + ") está acima da média (" + media + ")"
+    
+                } else {
+                    msn = "A temperatura (" + temperaturas[index] + ") está na média (" + media + ")"    
+                }                
+                msnResultado.classList.remove("atencao")
+                msnResultado.classList.add("normal")
+                
+            }
+            msnResultado.value = msn
+
+        
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

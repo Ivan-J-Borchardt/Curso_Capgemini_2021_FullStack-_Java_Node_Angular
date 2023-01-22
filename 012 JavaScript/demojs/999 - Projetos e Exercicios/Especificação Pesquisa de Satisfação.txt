@@ -1,0 +1,138 @@
+FN00. Protótipo da tela principal 
+=======================================================================================================================
+
+A empresa XYZ quer exibir um formulário de pesquisa de satisfação ao termino de seu atendimento online. Crie uma tela com 
+perguntas e respostas do tipo múltipla-escolha:
+a. Sua solicitação foi atendida? (não foi atendida, parcialmente atendida, totalmente atendida).
+b. Qual nota você daria para o atendimento? (péssimo, ruim, aceitável, bom, excelente).
+c. Como você classificaria o comportamento do atendente? (Indelicado, Mal-humorado, Neutro, Educado, Muito Atencioso).
+d. De 0 a 10, qual nota você daria para o produto (utilize range).
+e. Informe sua idade (campo numérico).
+f. Informa seu Gênero (Masculino/Feminino/LGBT).
+
+FN01. Rota Raiz
+========================================================================================================================
+Inicialize um projeto NODE com a seguinte estrutura de pastas: 
+
+pesquisaSatisfacao
+|  public
+|  |  css 
+|  |  js
+|  |  img 
+|  view 
+server.js
+
+Implementar o protótipo de tela (FN00) em um arquivo index.html na pasta view. 
+- Todos os recursos necessários para a tela (CSS, JS, Imagens, etc) devem ser salvos no diretório public. 
+Mapear a Rota raiz (/).
+- Retornar o arquivo index.html na resposta da requisição.    
+
+
+FN02. Salvando os dados 
+========================================================================================================================
+Mapear uma rota/endpoint ([POST]/pesquisa) para salvar os dados da pesquisa de satisfação. 
+Criar um arquivo pesquisa.csv para receber as respostas da pesquisa de satisfação. 
+- Cada vez que a pesquisa de satisfação é respondida, uma nova linha de dados deve ser gravada no arquivo;
+- As respostas devem ser salvas respeitando a ordem das questoes de a até f; 
+- Incluir também o timestamp do momento em que a resposta for enviada.
+
+
+
+- Em caso de gravação com sucesso, responder com o seguinte json:  
+
+          {
+           "Status" : "200"
+           "mensagem" : "Pesquisa Registrada Com sucesso"
+          }
+
+
+- Em caso de erro de gravação, responder com o seguinte json:  
+         {
+           "Status" : "500"
+           "mensagem" : err
+          }
+
+onde, err = retorno do erro de gravação de arquivo 
+
+No Frontend (index.html)
+========================
+Chamar a rota /pesquisa ao click do botão "enviar", passando todos os dados da tela. 
+Exibir a mensagem de retorno na tela por 2 segundos. Caso o Status seja 500, exibir a mensagem em vermelho e/ou em destaque. 
+
+
+
+
+FN03. Apurando as estatisticas 
+============================================================================================================================
+Mapear uma rota/endpoint ([GET]/estatisticas) para retornar a estatíticas da pesquisa de satisfação. 
+A rota deve retornar as estatisticas (percentual de ocorrencia de cada resposta para cada questao), no formato Json
+Exemplo: 
+
+{
+    "a" : {
+        "nãoFoiAtendida" : 10,
+        "parcialmenteAtendida" : 40,
+        "totalmenteAtendida)" : 50
+    }, 
+    "b" : {...}, 
+    "c" : {...}, 
+    ...
+
+}
+
+OBS. Implementar todo o cálculo/apuração das estatísticas em uma função independente.
+
+OBS2. A resposta e (idade do entrevistado) devem ser considerados os seguintes intervalos:
+
+menos de 15 anos,
+entre 15 e 21 anos, inclusive,
+entre 22 e 35 anos, inclusive, 
+entre 36 e 50 anos, inclusive, 
+acima de 50 anos           
+
+
+FN04. Tela de consulta de estatísticas 
+==============================================================================================================================
+Mapear uma nova rota/endpoint ([GET]/relatorio).
+- Chamar a função cálculo/apuração de estatísticas; 
+- Criar um relatório em HTML usando Template String;
+- Retornar o relatório criado através da resposta da requisição.
+
+
+FN05. Tela de consulda de estatísticas V2 - [Será implementado em aula]
+==============================================================================================================================
+Mapear uma nova rota/endpoint ([GET]/dados).
+- Chamar a função cálculo/apuração de estatísticas; 
+
+Implementar uma tela HTML usando Views e Templates (Handelbars) 
+
+
+FN06. Tela de login
+==============================================================================================================================
+Criar uma tela de login (arquivo view/login.html). Campos: Usuário, Senha; Botões: Login, Recuperar Senha;
+Critérios: a) A senha deverá ter no mínimo 8 e no máximo 15 caracteres;
+b)O campo usuário deverá permitir autocomplete
+c) O campo senha não deverá permitir autocomplete
+d) A senha deverá ser composta por letras maiúsculas e minúsculas, números e @#$ --> pattern="^(?=.[A-Z])(?=.[a-z])(?=.[0-9])(?=.[@#$])[a-zA-Z0-9@#$]{8,15}$"
+
+
+Mapear uma nova rota ([GET]/login).
+- Retornar o arquivo login.html na resposta da requisição.  
+
+
+FN07. Autenticação de usuário
+==============================================================================================================================
+Mapear uma nova rota ([POST]]/login). Esta rota receberá como parametros o userId e a senha no corpo da requisição.
+
+Implementar autenticação usando JWT. 
+- Os usuários deverão estar préviamente cadastrados em um arquivo usuarios.csv
+- Criar uma função "autenticacao" que receba userId e senha como parâmetros e retorne verdadeiro caso o usuário e senha estejam cadastrados  
+ou falso caso não estejam. 
+
+- Chamar a função autenticacao, caso o retorno dela seja verdadeiro, criar o token jwt e retorná-lo em formato json no interior da resposta http, 
+caso o retorno da função seja falso, retornar o status 401 (resp.status(401).end())
+
+- Criar uma função middleware verifyJWT para verificar o token, caso o token seja validado, invocar a função de callback next(), 
+caso o token não seja válido, responder com o status 401. 
+
+- Invocar a função verifyJWT nas rotas a serem controladas (/pesquisa)

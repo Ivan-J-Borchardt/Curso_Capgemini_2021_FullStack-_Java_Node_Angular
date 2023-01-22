@@ -1,0 +1,22 @@
+<div class="container">
+  <form class="formulario" (ngSubmit)="depositar()">
+    <h1 class="formulario__titulo">Depósito</h1>
+
+    <div class="form-field">
+      <label class="form-field__label" for="idConta">Conta Corrente:</label>
+      <input class="form-field__input" type="number" id="idConta" (blur)="desfocou($event)"  [(ngModel)]="conta" name="nmConta" >
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label" for="idValor">Valor:</label>
+      <input class="form-field__input" type="number" id="idValor" (mouseover)="mouseOver($event)" [(ngModel)]="valor" name="nmValor"  >
+    </div>
+
+    <div class="botao-wrapper">
+      <button class="botao" type="button" (click)="depositar()" >Depositar</button>
+      <button class="botao" type="button" (click)="teste()">teste</button>
+    </div>
+
+  </form>
+</div>
+

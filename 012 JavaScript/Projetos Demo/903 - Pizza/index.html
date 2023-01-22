@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        table,tr, td, th {
+            border: black;
+            border-style: solid;
+            padding: 2px;
+            margin: 2px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2"></div>
+
+        <div class="col-5 bg-danger bg-opacity-10"><br><br>
+
+            <form id="frmIdAdiciona" action="" method="GET">
+
+                <label for="idNome" id="idLbNome">Nome da Pizza:</label>
+                <input type="text" class="form-control" id="idNome" name="nmNome" maxlength="30"
+                    title="Nome da Pizza"><br>
+
+
+                <label for="idTamanho" id="idLbTamanho">Tamanho:</label>
+                <input type="text" class="form-control" id="idTamanho" name="nmTamanho" maxlength="30"
+                    title="Tamanho da Pizza"> <br>
+
+                <!-- -->
+                <label for="idPreco" id="idLbPreco">Preço:</label>
+                <input type="text" class="form-control" id="idPreco" name="nmPreco" maxlength="30"
+                    title="Preço da Pizza"><br><br>
+
+
+                <div class="d-grid  col-4 mx-auto">
+
+                    <input type="button" value="Incluir" id="btIdIncluir" onclick="cadastrar()"><br>
+
+                    <input type="button" value="Calcular" id="btIdCalcular" onclick="exibirRel()">
+
+                </div>
+            </form><br><br>
+
+        </div>
+
+        <div class="col-5">
+            <table class="tbRel" id="tbRel">
+                <thead id="thIdNome">
+                    <tr class="trNome">
+                        <th class="thNome">Nome</th>
+                        <th class="thTamanho">Tamanho</th>
+                        <th class="thPreco">Preço</th>
+                        <th class="thValor">R$/cm²</th>
+                        <th class="thDiferença">Diferença(%)</th>
+                    </tr>
+                </thead>
+                <tbody id="tboIdLinha">
+
+        
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+        </script>
+    <script>
+
+        //1- Capturar dados da tela
+        var pizzas = [] //criação do array
+
+
+        function cadastrar() {
+            var pizza = []
+            var nome = document.getElementById("idNome").value //fazer para os 3 campos
+            var tamanho = document.getElementById("idTamanho").value
+            var preco = document.getElementById("idPreco").value
+
+            pizza.push(nome) //fazer para os 3 campos
+            pizza.push(tamanho)
+            pizza.push(preco)
+
+
+            //2 --- calcular preço do cm² está numa função abaixo --calculo
+            var precoCm2 = calcularPrecoCm2(preco, tamanho)
+            pizza.push(precoCm2)
+
+            pizzas.push(pizza) // quatro dados: nome, tamanho, preço e custo cm²
+
+        }
+
+
+
+        //2- Calcular preço/cm² --calculo
+        function calcularPrecoCm2(preco, tamanho) {
+            var area = 3.14 * (tamanho / 2) ** 2
+            var precoCm2 = preco / area
+            return precoCm2
+        }
+
+
+        function exibirRel() {
+
+            //3- Ordenar os dados (do mais barato para o mais caro), com base no Preco/cm²
+
+            pizzas.sort(function (a, b) {
+                if (a[3] > b[3]) {
+                    return 1
+                }
+                if (b[3] > a[3]) {
+                    return -1
+                }
+                return 0
+            })
+
+
+
+            //4 - Calcular a diferença percentual entre pizzas
+            //criar um array percorrendo o pizzas linha a linha calculando diferça percentual do valor por cm² da linha atual com a proxima linha 
+            //push na linha
+
+            pizzas[0].push("Melhor CB")
+            for (let i = 0; i < pizzas.length - 1; i++) {
+                var precoCm2A = pizzas[i][3]
+                var precoCm2B = pizzas[i + 1][3]
+
+                var diffPercentual = ((precoCm2B / precoCm2A) - 1) * 100
+
+                pizzas[i + 1].push(diffPercentual)
+            }
+
+            //5 - Exibir o relatório (criar a tabela na tela)
+
+            var tbodyRel = document.getElementById("tboIdLinha")
+            for (let i = 0; i < pizzas.length; i++) {
+                var linha = montaTr(pizzas[i])
+                tbodyRel.appendChild(linha)
+            }
+
+        }
+
+        //Cria UMA linha (um tr)
+        function montaTr(pizza) {
+            let pizzaTr = document.createElement("tr")
+            pizzaTr.classList.add("tdNomeData")
+
+            console.log(pizza[3]);
+            console.log(pizza[3].toFixed(2));
+
+            pizzaTr.appendChild(montaTd(pizza[0], "tdNome"))
+            pizzaTr.appendChild(montaTd(pizza[1], "tdTamanho"))
+            pizzaTr.appendChild(montaTd(pizza[2], "tdPreco"))
+            pizzaTr.appendChild(montaTd(pizza[3].toFixed(5), "tdValor"))
+
+            if (isNaN(pizza[4])) {
+                pizzaTr.appendChild(montaTd(pizza[4], "tdDiferenca"))
+            }else{
+                pizzaTr.appendChild(montaTd(pizza[4].toFixed(2), "tdDiferenca"))
+            }
+            
+            return pizzaTr
+        }
+
+        //Cria UMA coluna (um td)
+        function montaTd(dado, classe) {
+            let pizzaTd = document.createElement("td")
+            pizzaTd.classList.add(classe)
+
+            pizzaTd.textContent = dado
+
+            return pizzaTd
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>

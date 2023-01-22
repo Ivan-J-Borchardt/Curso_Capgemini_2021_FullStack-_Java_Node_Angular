@@ -1,0 +1,35 @@
+{
+    "chave": "string",
+    "chave": 12,
+    "chave": ["string", 22.30, "string"],
+    "chave": true, 
+    "chave": {
+        "chave" : "valor"
+    }    
+}
+
+Tipos de dados: 
+------------------
+- String (0 ou mais caracteres Unicode);
+- Número (inteiro, ponto flutuante, fração, notação cientifica);
+- Booleano (true/false);
+- Nullo (null); 
+- Array (lista ordenada de 0 ou mais valores);
+- Objetos (lista não-ordenada de pares nome:valor, entre chaves{}).
+
+
+Aplicações:
+-------------------
+- Usado para troca de dados (criação e consumo) usando APIs; 
+- Arquivos de conficuração de programas e sistemas (.json);
+- Persistência de dados em navegadores e servidores;
+- É o formato de dados padrão na Web atualmente; 
+- Há vários formatos derivados do JSON como GeoJSON e BSON. 
+
+
+Serialização e Desserialização 
+-------------------------------
+JSON.stringfy
+JSON.parse
+
+

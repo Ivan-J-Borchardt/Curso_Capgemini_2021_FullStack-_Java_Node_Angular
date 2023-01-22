@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <label for="idVal">Valor: </label>
+        <input type="number" id="idVal" name="nmVal" step="0,01">
+
+        <br><br>
+        <p><b>Moeda de Entrada</b></p>
+        <input type="radio" id="idRealIn" name="nmModeaIn">
+        <label for="idRealIn">Real</label>
+
+        <input type="radio" id="idDolAmeIn" name="nmModeaIn">
+        <label for="idDolAmeIn">Dolar Americano </label>
+
+        <input type="radio" id="idEuroIn" name="nmModeaIn">
+        <label for="idEuroIn">Euro</label>
+
+        <input type="radio" id="idLibraEstIn" name="nmModeaIn">
+        <label for="idLibraEstIn">Libra Esterlina</label>
+
+        <input type="radio" id="idDolCanIn" name="nmModeaIn">
+        <label for="idDolCanIn">Dolar Canadense</label>
+        <br>
+
+        <br>
+        <p><b>Moeda de Saída</b></p>
+        <input type="radio" id="idRealOut" name="nmModeaOut">
+        <label for="idRealOut">Real</label>
+
+        <input type="radio" id="idDolAmeOut" name="nmModeaOut">
+        <label for="idDolAmeOut">Dolar Americano </label>
+
+        <input type="radio" id="idEuroOut" name="nmModeaOut">
+        <label for="idEuroOut">Euro</label>
+
+        <input type="radio" id="idLibraEstOut" name="nmModeaOut">
+        <label for="idLibraEstOut">Libra Esterlina</label>
+
+        <input type="radio" id="idDolCanOut" name="nmModeaOut">
+        <label for="idDolCanOut">Dolar Canadense</label>
+        <br>
+
+        <br><br>
+        <output id="idOut" name="nmOut"></output>
+        <br><br>
+        <input type="submit" id="btnConverter">
+    </div>
+
+    <script>
+        /*
+        var cotacao = {
+            
+            
+            
+            
+        }
+        var data = new Date();
+ 
+        console.log(data.getDate());
+        console.log(data.getDay());
+        console.log(data.getMonth());
+        console.log(data.getYear());
+        console.log(data.getFullYear());
+        console.log(data.getHours());
+        console.log(data.getMinutes());
+        console.log(data.getSeconds());
+        console.log(data.getMilliseconds());
+        console.log(data.getTimezoneOffset());
+        */
+
+        var texto = "abcde"
+
+        console.log(texto[3]);
+
+        var paridades = {
+            paridadeReal : 0,
+            paridadeEuro : 0,
+            paridadeDolar : 0,
+            paridadeDolarC : 0, 
+            paridadeLibra : 0
+        }
+
+        function acionarBusca(data) {
+            buscarCotacao("USD", data, paridades, "paridadeDolar", buscarParidadesFeriado) //Dolar Americano 
+            //console.log(paridades.paridadeDolar);
+            buscarCotacao("EUR", data, paridades, "paridadeEuro", buscarParidadesFeriado) //Euro 
+            buscarCotacao("GBP", data, paridades, "paridadeLibra", buscarParidadesFeriado) //Libra Esterlina
+            buscarCotacao("CAD", data, paridades, "paridadeDolarC", buscarParidadesFeriado) //Dolar Canadense
+        }
+
+        function buscarParidades(data) {
+            let dia = new Date(data)
+            data = (dia.getMonth() + 1) + "-" + dia.getDate() + "-" + dia.getFullYear()
+            console.log(data);
+            acionarBusca(data)
+           
+        }
+
+        function buscarParidadesFeriado(data) {
+            let dia = new Date(data)
+            data = (dia.getMonth() + 1) + "-" + (dia.getDate() - 1) + "-" + dia.getFullYear()
+            console.log(data);
+            acionarBusca(data)
+        }
+
+
+        window.onload = function () {
+            var data = new Date();
+
+            buscarParidades(data)
+      
+
+        }
+
+
+
+
+
+        function buscarCotacao(moeda, data, paridades2, index, callback) {
+            var xhr = new XMLHttpRequest()
+
+            xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='" + moeda + "'&@dataCotacao='" + data + "'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim")
+
+            xhr.addEventListener('load', function () {
+                var resposta = xhr.responseText
+                var respostaOBJ = JSON.parse(resposta)
+                console.log(respostaOBJ);
+                
+                if (respostaOBJ.value.length > 0) {
+                    paridades2[index] = respostaOBJ.value[respostaOBJ.value.length - 1].paridadeCompra
+                } else {
+                    callback(data)
+                    //alert("Ainda não saiu o boletin de hoje (sabado, domingo e feriado nao tem boletim")
+                } 
+            
+            })
+
+            xhr.send()
+        }
+
+
+
+        var btnConverter = document.getElementById("btnConverter")
+
+        btnConverter.onclick = function (event) {
+            converter()
+        }
+
+        function converter() {
+
+           
+
+            let valDolar
+            let valOut
+            let valorIn = Number(document.getElementById("idVal").value)
+
+            let ehRealIn = document.getElementById("idRealIn").checked;
+            let ehDolarAmeIn = document.getElementById("idDolAmeIn").checked;
+            let ehEuroIn = document.getElementById("idEuroIn").checked;
+            let ehLibraIn = document.getElementById("idLibraEstIn").checked;
+            let ehDolarCanIn = document.getElementById("idDolCanIn").checked;
+
+            let ehRealOut = document.getElementById("idRealOut").checked;
+            let ehDolarAmeOut = document.getElementById("idDolAmeOut").checked;
+            let ehEuroOut = document.getElementById("idEuroOut").checked;
+            let ehLibraOut = document.getElementById("idLibraEstOut").checked;
+            let ehDolarCanOut = document.getElementById("idDolCanOut").checked;
+
+
+            if (ehRealIn) {
+                valDolar = valorIn * paridades.paridadeReal //precisa ser alterado...
+            } else if (ehDolarAmeIn) {
+                valDolar = valorIn * paridades.paridadeDolar
+            } else if (ehEuroIn) {
+                valDolar = valorIn * paridades.paridadeEuro
+            } else if (ehLibraIn) {
+                valDolar = valorIn * paridades.paridadeLibra
+            } else if (ehDolarCanIn) {
+                valDolar = valorIn * paridades.paridadeDolarC
+            }
+
+            //Dolar para Euro 
+            if (ehRealOut) {
+                valOut = valDolar / paridades.paridadeReal //Precisa ser alterado....
+            } else if (ehDolarAmeOut) {
+                valOut = valDolar / paridades.paridadeDolar
+            } else if (ehEuroOut) {
+                valOut = valDolar / paridades.paridadeEuro
+            } else if (ehLibraOut) {
+                valOut = valDolar / paridades.paridadeLibra
+            } else if (ehDolarCanOut) {
+                valOut = valDolar / paridades.paridadeDolarC
+            }
+
+            document.getElementById("idOut").value = "Moeda Convertida " + valOut
+        }
+
+    </script>
+
+</body>
+
+</html>

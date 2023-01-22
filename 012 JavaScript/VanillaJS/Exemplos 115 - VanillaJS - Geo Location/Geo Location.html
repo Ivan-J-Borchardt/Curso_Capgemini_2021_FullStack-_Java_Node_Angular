@@ -1,0 +1,85 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : VanillaJS - Geo Location
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Location</title>
+
+
+</head>
+
+<body>
+    <p id="demo"></p>
+
+    <form action="">
+
+        <input type="button" value="Get Geo Location" onclick="getLocation()">
+
+    </form>
+
+    <div id="mapholder"></div>
+
+    <script>
+        var x = document.getElementById("demo");
+        
+        //Buscando geoLocalização
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        
+        //Exibindo as coordenadas na tela 
+        function showPosition(position) {
+            console.log("Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude);
+            
+            x.textContent = "Latitude: " + position.coords.latitude +
+            "Longitude: " + position.coords.longitude;
+            showMap(position); 
+        }
+
+        //Tratamento de erros
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    x.textContent = "O usuario não permitiu acesso à sua Localização."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.textContent = "Informação de GeoLocalização indisponível."
+                    break;
+                case error.TIMEOUT:
+                    x.textContent = "timed out - O tempo limite para a requisição foi excedido."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.textContent = "Erro desconhecido."
+                    break;
+            }
+        }
+
+        //Exibindo mapa na tela 
+        function showMap(position) {
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+
+            var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=400x300&sensor=false&key=AIzaSyAOBfMU9uTtsIMU0ngB44_jvYuoKFpXcqk";
+
+            document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+        }
+
+    </script>
+
+</body>
+
+</html>

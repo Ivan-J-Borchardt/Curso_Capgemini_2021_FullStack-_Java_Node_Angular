@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="target">
+        <h1>teste</h1>
+    </div>
+
+    <script>
+        //concatenação simples...
+        var qtd = 15
+        var texto = "Quantidade (" + qtd + ")"
+        console.log(texto);
+
+
+        //Template String (Interpolação em outras linguagens)
+        var qtd2 = 17
+        var texto2 = `Quantidade (${qtd2})`
+        console.log(texto2);
+
+        //Exemplo real de uso de Template String
+        var qtd3 = 25
+        var carrinho = `<p>Quantidade (${qtd3})</p>`
+        //document.getElementById("target").innerHTML = carrinho
+        document.getElementById("target").insertAdjacentHTML("afterbegin",carrinho)
+
+
+    </script>
+</body>
+</html>

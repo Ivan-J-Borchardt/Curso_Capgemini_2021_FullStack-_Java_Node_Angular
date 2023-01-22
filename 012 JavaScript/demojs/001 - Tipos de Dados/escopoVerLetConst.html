@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //var let const 
+        //Escopo Global 
+        var varGlobal = "Var Global"
+
+        
+        testeEscopo()
+        function testeEscopo() {
+            testeEscopoIf = "TESTE"
+            console.log("topo do escopo " + testeEscopoIf );
+            //Escopo Funcional 
+            var num = 20
+
+            console.log("numero dentro da funcao:" + num);
+            console.log("var global dentro da funcao " + varGlobal);
+
+            if (true) { //Escopo de bloco
+                var testeEscopoIf = 99 
+                console.log("Dentro do If " + testeEscopoIf);
+            }
+            console.log("Fora do If " + testeEscopoIf);
+
+            for (let index = 0; index < 10; index++) {
+                console.log("dentro do for " + index);
+                
+            }
+            //console.log("fora do for " + index);
+            var entrou = true 
+            while (entrou) {
+                const altura = 23
+                console.log("dentro do while " + altura);
+                entrou = false
+                largura = 20
+            }
+            //console.log("Fora do while " + altura);
+            console.log("largura Fora do while " + largura);
+
+        }
+
+        console.log("largura Fora da funcao " + largura);
+        console.log("var global fora da funcao " + varGlobal);
+        //console.log("numero fora  da funcao:" + num);
+
+        //------------------------------------------------------------------
+
+        const PI = 3.14
+        
+        /*
+        if (PI = 3.14) {
+            
+        }
+        */
+        console.log(PI);
+
+        fazerAlgo()
+        function fazerAlgo(params) {
+            const resultado = params * 2
+        
+            return resultado 
+        }
+
+        //Const com array e objetos 
+
+        const x = [1, 2, 3]
+
+        //x = [3,4,5,6]
+
+        x.push(4)
+        x[4] = 8
+        console.log(x);
+
+        const aviador = {
+            nome: "Santos Dumont", 
+            aeronave: "14 Bis", 
+            data: "23 de outubro de 1906"
+        }
+
+        //aviador = {nome: "xpto"}
+
+        aviador.nome = "Albero Santos Dumont"
+        console.log(aviador);
+
+    </script>
+
+
+</body>
+
+</html>

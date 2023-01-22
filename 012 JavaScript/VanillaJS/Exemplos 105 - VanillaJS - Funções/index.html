@@ -1,0 +1,112 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : Functions
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+    <Script>
+
+        /*
+            Funções são "Tarefas"/"Ações" executadas assim que são chamadas ou em 
+            decorrencia de algum evento.
+            Uma função pode receber parâmetros e retornar um resultado. Veja um exemplo 
+            completo abaixo. 
+        */
+        function calcularPesoIdeal(genero, altura){
+            let pesoIdeal = 0; 
+            if (genero == "F") {
+                pesoIdeal = (62.1 * altura) - 44.7; //Peso Ideal feminino
+            }else if (genero == "M") {
+                pesoIdeal = (72.7 * altura) - 58;   //Peso Ideal Masculino
+            }
+            return pesoIdeal; 
+        }
+
+        //Chamada da função: 
+
+        var pesoIdeal = calcularPesoIdeal("M", 1.82);
+        console.log("Peso Ideal: " + pesoIdeal); 
+
+        /*
+            Toda função pode ter: 
+            * Uma chamada (chamada para executar a função)
+            * Parametros (opcional) - No Exemplo acima, genero e altura são os parâmetros
+            * Ação (O processamento no interior da função) - No exemplo, o cálculo do peso ideal... 
+            * Retorno (opcional) - (O valor resultante do Processamento) - No exemplo, o pesoIdeal está sendo retornado
+        */
+
+        //------------------------------------------------------------------------------------------------------------
+
+        /* Funções Anônimas ou Funções de expressão (Functions expression)
+           ----------------
+            Como o próprio nome diz, são funções sem nome. 
+            O JavaScript é uma linguagem Funcional. Uma das caracteristicas do paradigma funcional 
+            é poder atribuir funções a variáveis.   
+        */
+ 
+        var pesoIdeal2 = function(genero, altura) {
+            let pesoIdeal = 0; 
+            if (genero == "F") {
+                pesoIdeal = (62.1 * altura) - 44.7; //Peso Ideal feminino
+            }else if (genero == "M") {
+                pesoIdeal = (72.7 * altura) - 58;   //Peso Ideal Masculino
+            }
+            return pesoIdeal;
+        }
+        console.log("Peso Ideal 2: " + pesoIdeal2("F", 1.82));
+
+        //------------------------------------------------------------------------------------------------------------
+
+        /* Funções Seta (Arrow Function) 
+           ----------------
+        */
+
+        var pesoIdeal3 = (genero, altura)=>{
+            let pesoIdeal = 0; 
+            if (genero == "F") {
+                pesoIdeal = (62.1 * altura) - 44.7; //Peso Ideal feminino
+            }else if (genero == "M") {
+                pesoIdeal = (72.7 * altura) - 58;   //Peso Ideal Masculino
+            }
+            return pesoIdeal;
+        }
+        console.log("Peso Ideal 3: " + pesoIdeal3("F", 1.82));        
+
+        //Outro exemplo: Caso o corpo da function tenha apenas uma linha, podemos omitir as chaves e a palavra return.
+        var dobro = b=>b*2; 
+
+        console.log("Dobro: " + dobro(3));
+
+        //------------------------------------------------------------------------------------------------------------
+        /*
+            Alguns assuntos que ainda abordaremos num futuro próximo: 
+
+               Funções Construtoras 
+               Funções callback
+               Funções Geradoras 
+               Função Factory
+               Recursividade 
+               Diferenças entre Funções Arrow e Anônimas no uso em OO 
+               Promisses 
+               https://devpleno.com/factory-function/
+               https://blog.matheuscastiglioni.com.br/definindo-funcoes-em-javascript/
+               https://medium.com/@viniazvd/classes-vs-fun%C3%A7%C3%B5es-construtoras-vs-fun%C3%A7%C3%B5es-f%C3%A1brica-b92a6afa70a4
+               ...
+        */
+
+
+    </Script>    
+    </body>
+</html>

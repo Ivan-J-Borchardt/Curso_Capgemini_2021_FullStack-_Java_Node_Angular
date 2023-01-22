@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        var num = 0;
+        //Estrutura de selecao simples
+        if (num > 23) {
+            console.log(num + "é maior que 23")
+        }
+
+        //Estrutura de selecao composta
+        if (num < 10 || (num > 23 && num < 50)) {
+            console.log("entrou no if")
+        } else {
+            console.log("nao entrou no if")
+        }
+
+        var idade = 20;
+        //Estrutura de seleção encadeada
+        if (num < 10 || (num > 23 && num < 50)) {
+            if (idade > 56) {
+                console.log("entrou if");
+            }
+        } else {
+            console.log("Entrou no ELSE");
+        }
+
+        var menu = 3;
+        var menu2 = 0; 
+
+        if (menu == 0) {
+            console.log("if menu 0");
+        } else {
+            if (menu == 1) {
+                console.log("if menu 1");
+            } else {
+                if (menu == 2) {
+                    console.log("if menu 1");
+                } else {
+                    console.log("outro menu");
+                }
+            }
+        }
+
+        if (menu == 0) {
+            console.log("if menu 0");
+        } else if (menu == 1) {
+            console.log("if menu 1");
+        } else if (menu == 2) {
+            console.log("if menu 2");
+        } else if (menu == 3) {
+            console.log("if menu 3");
+        } else {
+            console.log("outro menu ");
+        }
+
+
+        switch (menu) {
+            case 0:
+                console.log("if menu 0");
+                break;
+            case 1:
+                console.log("if menu 1");
+                break;
+            case 2:
+                console.log("if menu 2");   
+                break;
+            case 3:
+                console.log("if menu 3");
+                break;
+            default:
+                console.log("outro menu");
+                break;
+        }
+
+        if (menu == 0) {
+            if (menu2 == 0) {
+                console.log("verdadeiro")
+            } else {
+                console.log("falso")
+            }
+        } else {
+            console.log("falso")
+        }
+
+        
+        var opcao = (menu == 0)? testarMenu2 : "falso"; 
+
+        console.log("resultado do ternario : " + opcao); 
+
+        function testarMenu2(){
+            return (menu2 == 0)? "verdadeiro" : "falso"; 
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <script>
+        const pi = 3.14
+        let data
+        var idade = 12
+        
+
+
+        /*
+           5 tipos de dados (data types) 
+            - string String 
+            - number Number 
+            - boolean
+            - object
+            - function
+
+            2 tipos especiais
+            - null 
+            - undefined 
+
+            6 tipos de objetos (object types)
+            - Object 
+            - Date
+            - Array
+            - String
+            - Number
+            - Boolean
+
+
+
+            operadores para testar o tipo da variável
+            ------------------------------------------
+            typeOf 
+            isNaN
+
+            2 formas de fazer Conversoes de tipo 
+            ------------------------------------------
+            - Conversoes automaticas (conversoes implicitas)
+            ------------------------------------------------
+            -> variavel = 5 + null (conversao para number)
+            -> variavel = "5" + null ("5null" conversao para String)
+            -> variavel = "5" + 2 ("52" conversao para string)
+            -> variavel = "5" - 2 (3 conversao para numero)
+            -> variavel = "5" * "2" (10 conversao para number)
+
+            - Conversoes usando funcoes do JS (Conversoes explicitas) 
+            ----------------------------------------------------------
+            Para String 
+            -----------
+            -> Date to String 
+            -> Boolean to String
+            -> Number to String 
+            
+            variavel = String(123)
+            variavel = String(x)
+
+            variavel = x.toString; 
+
+            Para Number
+            -----------
+            -> String to Number 
+              variavel = Number("3.14")
+              variavel = parseFloat("3.14")
+              variavel = parseInt("10.5")
+
+              var y = "5"
+              var x = + y
+
+         
+
+        */
+        //Conversao para string 
+        //--------------------------------
+            var variavel
+            var x = 345
+
+            variavel = String(123)
+            console.log(123)
+            console.log("tipo : " + typeof(variavel) + " " + variavel)
+            variavel = String(x)
+            console.log("tipo : " + typeof(variavel) + " " + variavel)
+
+            let salBase = 1000.00; 
+
+            console.log("salBase 1" + typeof(salBase));
+
+            //salBase = String(salBase); 
+            salBase = salBase.toString(); 
+
+            console.log("salBase 2" + typeof(salBase));
+
+
+        //Outros métodos que retornam Strings 
+
+        var h = 75.123456789; 
+        console.log("h.toFixed(2)              " + h.toFixed(2))
+        console.log("h.toExponential(3)        " + h.toExponential(3))
+        console.log("h.toPrecision(5)          " + h.toPrecision(5))
+
+
+        //Conversão de String para number
+        //--------------------------------
+        //1. forma
+        var y = "5"
+        var x = + y
+
+        console.log(typeof(x)); 
+
+        //2. forma
+        console.log("'3.14' to number: " + Number("3.14"));
+        console.log("true to number: " + Number(true));
+        console.log("false to number: " + Number(false));
+        console.log("'98 97' to number: " + Number("98 97"));
+        console.log("espaço to number: " + Number(" "));
+        console.log("vazio to number" + Number(""));
+
+        //3. forma 
+
+        console.log("parseFloat('10.5') " + parseFloat("10.5"));
+        console.log("parseFloat('10') " + parseFloat("10"));
+
+        console.log("parseInt('10.5') " + parseInt("10.5"));
+        console.log("parseInt('10') " + parseInt("10"));
+
+
+        console.log("oi" - 2); 
+
+        idade = 'oi'
+
+        idade = true
+
+        console.log(typeof(idade))
+        console.log(isNaN(idade))
+
+
+        console.log("Olá mundo!!!")
+
+        //alert("Olá Mundo!!")
+
+        
+
+
+    </script>
+</body>
+</html>

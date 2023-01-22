@@ -1,0 +1,109 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : Arrays
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //Criando um Array 
+    //========================================
+    
+    //Array Vazio
+    var frutas = []; 
+
+    //Array pré inicializado
+    var carros = ['gol', 'Ka', 'celta', 12]; //Observe que o Array permite guardar multiplos tipos de dados 
+
+    //Usando o construtor da classe Array
+    //Para simplicidade, legibilidade e velocidade de execução, use o método acima para declarar arrays (o método literal de array).
+    var legumes = new Array('brócolis', 'cenoura', 'alface'); 
+
+
+    
+    //Acessando as posições/ elementos do Array
+    //=========================================
+    carros[1] = "Fiesta";
+
+    console.log(carros[0]);
+    console.log(carros[1]);
+    console.log(carros[2]);
+
+    for (let index = 0; index < carros.length; index++) {
+        console.log("- " + index + " -> " + carros[index]);
+
+    }
+
+
+    //Tamanho do Array 
+    console.log("Tamanho do array carros:" + carros.length);
+
+    //Inserindo um novo elemento ao final do Array 
+    carros.push("Fusca");
+
+    //Retirando elemento do começo do Array
+    console.log("Teste shift");
+    carros.shift();
+    console.log("Uso do toString: " + carros.toString());
+
+    console.log("Tamanho do array carros:" + carros.length);
+
+    //Imprimindo o Array inteiro
+    //==========================
+    console.log("Uso do toString: " + carros.toString());
+    console.log("Uso de Join: " + carros.join(" - "));
+
+
+    //Tipo de dados
+    //==============
+    console.log("Tipo de dado: " + typeof (carros));
+    console.log("Tiop dew dado do elemento 0 de carros: " + typeof (carros[0]));
+    console.log("Tiop dew dado do elemento 3 de carros: " + typeof (carros[3]));
+
+
+    // var carro0 = "gol";
+    // var carro1 = "Ka";
+    // var carro2 = "celta"; 
+
+
+    //Destructuring: 
+    //--------------
+    // A sintaxe de atribuição via desestruturação (destructuring assignment) é uma expressão 
+    // JavaScript que possibilita extrair dados de arrays ou objetos em variáveis distintas. 
+    
+    //https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Atribuicao_via_desestruturacao     
+
+    var a, b, rest;
+    [a, b] = [1, 2];
+    console.log(a); // 1
+    console.log(b); // 2
+
+    [a, b, ...rest] = [1, 2, 3, 4, 5];
+    console.log(a); // 1
+    console.log(b); // 2
+    console.log(rest); // [3, 4, 5]
+
+    ({ a, b } = { a: 1, b: 2 });
+    console.log(a); // 1
+    console.log(b); // 2
+
+    // ES2016 - não implementado em Firefox 47a01
+    ({ a, b, ...rest } = { a: 1, b: 2, c: 3, d: 4 });
+
+
+</script>
+
+</html>

@@ -1,0 +1,145 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : VanillaJS - Promises and Fetch API
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <script>
+            //JavaScript é uma linguagem  - Single Thread
+            //                            - IO não bloqueante (assincrono)
+
+            //Promise é um Objeto que contém um conjunto de funcionalidades para gerenciar
+            //o processamento assincrono
+
+            //Primeiro Exemplo de processamento assincrono: 
+
+            console.log("Primeira Ação!!!"); 
+
+            setTimeout(function() {
+                console.log("Segunda Ação!!!"); 
+            }, 0); 
+
+            console.log("Terceira Ação!!!"); 
+
+            setTimeout(function() {
+                console.log("Quinta Ação!!!"); 
+            }, 0);                   
+ 
+            console.log("Quinta Ação!!!"); 
+
+            //No exemplo acima, a segunda e quinta ação foram postas numa fila de callback, 
+            //esta fila só é executada após o código todo ter sido
+            //executado
+
+            //As Promises tem 4 estados: 
+            // -> Pendente
+            // -> Realizado
+            // -> Rejeitado
+            // -> Estabelecido
+
+            //forçando o estado Realizado da Promise
+            function jaRealizada(){
+                return Promise.resolve('89107000');
+            }
+
+            jaRealizada().then(function(dado) {
+                console.log("Promisse resolvida", dado);
+            });
+
+            //forçando o estado Rejeitado da Promise
+            function jaRejeitado(){
+                return Promise.reject();
+            }
+
+            jaRejeitado().catch(function() {
+               console.log("Rejeitado!!"); 
+            });
+
+            //Forma de uso mais comum de Promises 
+            //------------------------------------------------- 
+            function promiseTrabalhada(){
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        resolve("Olá Pessoal!!");
+                    }, 1000);        
+                });
+            } 
+            
+            promiseTrabalhada().then(function(msn) {
+               console.log(msn); 
+            });
+
+
+            //https://viacep.com.br/ws/89107000/json/
+            window.fetch('https://viacep.com.br/ws/89107000/json/').then(function(data) {
+               // data.json().then(function(end){
+               //     console.log(end);
+               // });
+                
+                data.json().then(function(endereco){
+                    console.log(endereco);
+                });        
+            });
+
+            function buscaCepDB(){
+                return Promise.resolve('89107000');
+            }
+
+
+            //Reescrevendo o fetch acima... 
+            buscaCepDB()
+                .then(function(cep){
+                    return window
+                        .fetch('https://viacep.com.br/ws/'+ cep +'/json/');
+                })
+                .then(function(data){
+                    return data.json();
+                })
+               // .then(function(){
+               //     return jaRejeitado();
+               // })
+                .then(function(end){
+                    console.log(end);
+                })
+                .catch(function(){
+                    console.log('Aconteceu algum erro');
+                }) 
+                .finally(function(){
+                    console.log('finally sempre é executada');
+                });     
+
+            //Recebe um array de promises e retorna o resultado de todas ao mesmo tempo
+            Promise.all([
+                buscaCepDB(),
+                jaRealizada()
+
+            ])
+            .then(function(promisesResolvidas){
+                console.log("-->" + promisesResolvidas);
+            });
+
+            //Recebe um array de promisses e retorna o resultado da primeira promise resolvida ou rejeitada
+            Promise.race([
+                buscaCepDB(),
+                jaRealizada()
+
+            ])
+            .then(function(promisesResolvidas){
+                console.log("-->" + promisesResolvidas);
+            })
+
+
+        </script>
+    </body>
+</html>

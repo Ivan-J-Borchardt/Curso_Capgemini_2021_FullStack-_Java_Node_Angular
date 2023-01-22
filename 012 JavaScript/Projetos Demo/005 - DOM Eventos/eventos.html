@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        div {
+
+            background-color: rgba(107, 82, 82, 0);
+            margin: 10px;
+            padding: 5px;
+        }
+
+        #idMain {
+
+            background-color: rosybrown;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        #idDiv {
+            background-color: royalblue;
+            margin: 5px;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="" method="GET">
+        <div>
+            <label for="idNome">Nome:</label>
+            <input type="text" id="idNome">
+
+        </div>
+        <div>
+            <label for="idSobrenome">Sobrenome:</label>
+            <input type="text" id="idSobrenome">
+
+        </div>
+        <div>
+            <input type="submit" id="idImput">
+        </div>
+
+    </form>
+
+    <main id="idMain">
+        <p>Acima da div</p>
+        <div id="idDiv">
+            <p>Dentro da div</p>
+        </div>
+        <p>Abaixo da div</p>
+
+    </main>
+
+
+    <p id="idP01">Este texto tb é clicável...</p>
+    <button id="idBtn01" type="button" ondblclick="executarTarefa()">Clique me 01</button>
+    <button id="idBtn02" type="button">Clique me 02</button>
+    <button id="idBtn03" type="button">Clique me 03</button>
+    <button id="idBtn04" type="button">Clique me 04</button>
+
+    <script>
+
+        function executarTarefa() {
+            console.log("Fui Clicado - 01");
+        }
+
+
+        //Event Handler - nível 1
+        var botao = document.getElementById("idBtn02")
+
+        botao.onclick = function(){
+            console.log("Fui clicado 02");
+        }
+
+        var texto = document.getElementById("idP01")
+
+        texto.onclick = function(){
+            console.log("O texto foi clicado....");
+        }
+
+        texto.ondblclick = function(){
+            var rndCol = "rgb(" + corAleatoria(255) + "," + corAleatoria(255) + "," + corAleatoria(255) + ")" 
+            texto.style.color = rndCol
+        }
+
+        function corAleatoria(number){
+            return (Math.random() * number)
+
+        }
+
+        //Eventos DOM Nível 2
+        var botao3 = document.getElementById("idBtn03")
+
+        botao3.addEventListener("click", funcao1)
+
+
+
+        //----
+        var botao4 = document.getElementById("idBtn04")
+
+        botao4.addEventListener("mouseover", function(){
+            console.log("Passou o mouse por cima de mim...");
+        })
+
+
+        botao4.addEventListener("click", function(){
+            botao3.removeEventListener("click", funcao1)
+
+            botao3.addEventListener("click", funcao2)
+        })
+
+        //
+
+        function funcao1(){
+            console.log("Fui clicado 03 - Funcao 1");
+        }
+
+        function funcao2(){
+            console.log("Fui clicado 03 - Funcao 2");
+        }
+
+        //Outros conceitos de evento
+        var contMain = document.getElementById("idMain")
+
+        contMain.onclick = function(event){
+            console.log("------ Main -------")
+            console.log(event);
+
+            //console.log(event.target);
+            //console.log("target.tagName " + event.target.tagName);
+            //console.log("target.parentNode " + event.target.parentNode.tagName);
+
+            //console.log(event.target.parentNode.parentNode.parentNode.parentNode);
+
+
+            //console.log("currentTarget.tagName " + event.currentTarget.tagName);
+
+        }
+
+        var contDiv = document.getElementById("idDiv")
+        contDiv.onclick = function (event) {
+            event.stopPropagation()
+
+            console.log("------ Div -------")
+            //console.log(event.target)
+            //console.log("target.parentNode " + event.target.parentNode.tagName);
+            //console.log("target.tagName " + event.target.tagName)
+            //console.log("currentTarget.tagName " + event.currentTarget.tagName)
+        }
+
+
+        var botaoForm = document.getElementById("idImput")
+        botaoForm.addEventListener("click", function (event) {
+            event.preventDefault()
+
+            let form = document.querySelector("form")
+            form.submit()
+            //form.reset()
+        })
+
+
+    </script>
+
+    
+</body>
+</html>

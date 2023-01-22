@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        
+        
+        //Passo 0: Vamos relembrar de como fazemos requisiçoes com uma Promise 
+        function getCEP() {
+            //https://viacep.com.br/ws/89107000/json/
+            fetch('https://viacep.com.br/ws/89107000/json/')
+                .then(function (data) {
+                    return data.json()
+                })
+                .then(function (endereco) {
+                    console.log(endereco);
+                });
+        }
+
+        //Passo 1: Substituindo o .then pelo await 
+        async function getCEPAwait() {
+            //https://viacep.com.br/ws/89107000/json/
+            var resultado = await fetch('https://viacep.com.br/ws/89107000/json/')
+            return resultado.json()
+        }
+
+        (async function () {
+            console.log(await getCEPAwait());
+        }())
+
+        //Passo 2: Um async retorna uma promise... 
+        async function getNumero() {
+            return await 2;
+        }
+
+        console.log(getNumero()); //isso retorna uma promisse pendente
+
+        getNumero().then(console.log); //resolvendo o problema
+
+
+        //Passo 3: Trabalhando com arrays de promises e async/await
+        async function getMoedas() {
+            var resultado = await fetch('https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json');
+            return resultado.json();
+        }
+
+
+        async function getParidade(moeda) {
+            var resultado = await fetch("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='" + moeda + "'&@dataCotacao='11-18-2020'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim");
+            //var dados = await resultado.json();
+            //console.log(dados.cep);
+            return resultado.json();
+        }
+
+        (async function () {
+            var moedas = await getMoedas();
+
+            var paridades = [];
+
+            for (let index = 0; index < moedas.value.length; index++) {
+
+                console.log(moedas.value[index])
+                paridades.push(await getParidade(moedas.value[index].simbolo))
+                //paridades.push(getParidade(moedas.value[index].simbolo))
+
+            }
+
+
+            //Passo 4. async await nao funciona com forEach  (detalhes no exemplo mais abaixo )
+            //***Colocar no debug
+            moedas.value.forEach(async moeda => {
+             
+                paridades.push(await getParidade(moeda.simbolo))
+
+                //---> uma promise normal tb nao sera respeitada...
+                //getParidade(moeda.simbolo).then(function(params) {
+                //    paridades.push(params)
+                //})
+            });
+
+            //Passo 5. Promise.all - faz as requisições de forma paralela, mas mantém a 
+            //ordem dos resultados no array de saída coerente com o array de entrada
+            console.log(paridades);
+            var paridadesAll = await Promise.all(paridades);
+            console.log(paridadesAll);
+        }());
+
+
+        //Passo 6. entendendo as armadilhas do Async Await
+        //https://oieduardorabelo.medium.com/javascript-armadilhas-do-asyn-await-em-loops-1cdad44db7f0
+
+        const urls = [
+            'https://jsonplaceholder.typicode.com/todos/1',
+            'https://jsonplaceholder.typicode.com/todos/2',
+            'https://jsonplaceholder.typicode.com/todos/3'
+        ];
+
+        async function getTodos() {
+            await urls.forEach(async (url, idx) => {
+                const todo = await fetch(url);
+                console.log(`Received Todo ${idx + 1}:`, todo);
+            });
+
+            console.log('Finished!');
+        }
+
+        getTodos()
+
+        /*
+            ⚠️ Problema 1:
+            O código acima será executado com sucesso. No entanto, observe que Finished! foi mostrado primeiro, apesar do uso de await antes do urls.forEach. O primeiro problema é que você não pode fazer await no loop inteiro ao usar forEach.
+            ⚠️ Problema 2:
+            Além disso, apesar do uso de await dentro do loop, ele não esperou que cada solicitação terminasse antes de executar a próxima. Então, os pedidos foram registrados fora de ordem. Se a primeira solicitação demorar mais que as solicitações a seguir, ela ainda poderá terminar por último.
+            Por ambas as razões, forEach não deve ser invocado se você estiver usando async/await.
+        */
+
+        /*
+            Promise.all
+            Vamos resolver o problema de esperar que todo o loop seja concluído. Como await cria uma Promise sob o capô, podemos usar Promise.all com await para esperar todos os pedidos que foram iniciados durante o loop:
+        */
+
+        const urls1 = [
+            'https://jsonplaceholder.typicode.com/todos/1',
+            'https://jsonplaceholder.typicode.com/todos/2',
+            'https://jsonplaceholder.typicode.com/todos/3'
+        ];
+
+        async function getTodos() {
+            const promises = urls1.map(async (url, idx) =>
+                console.log(`Received Todo ${idx + 1}:`, await fetch(url))
+            );
+
+            await Promise.all(promises);
+
+            console.log('Finished!');
+        }
+
+        /*
+            Resolvemos a questão de esperar que todas as solicitações terminem antes de continuar. Parece também que resolvemos a questão dos pedidos que acontecem fora de ordem, mas não é exatamente esse o caso.
+            Como mencionado anteriormente, Promise.all irá esperar a execução de todas as promessas feitas em paralelo. Não iremos esperar que o primeiro pedido seja retornado antes de começar o segundo, ou o terceiro. Para a maioria das finalidades, isso é bom e é uma solução muito eficaz. Mas, se você realmente precisar que cada solicitação aconteça em ordem , Promise.all não resolverá isso.
+        */
+
+        /*
+            for..of
+            Sabemos que forEach não respeita em nada o async/await e Promise.all só funciona se a ordem de execução não for importante. Vamos ver uma solução que resolve os dois casos.
+            O for..of executa o loop na ordem esperada - aguardando que cada operação await anterior seja concluída antes de passar para a próxima:
+        */
+
+        const urls2 = [
+            'https://jsonplaceholder.typicode.com/todos/1',
+            'https://jsonplaceholder.typicode.com/todos/2',
+            'https://jsonplaceholder.typicode.com/todos/3'
+        ];
+
+        async function getTodos() {
+            for (const [idx, url] of urls2.entries()) {
+                const todo = await fetch(url);
+                console.log(`Received Todo ${idx + 1}:`, todo);
+            }
+
+            console.log('Finished!');
+        }
+        /*
+            Se você não precisa acessar o índice, o código fica ainda mais conciso:
+            for (const url of urls) { ··· }
+        */
+
+        /*
+            Uma das principais desvantagens de usar um loop for..of é que sua performance é baixa em comparação com as outras opções de loop em JavaScript. No entanto, o argumento de desempenho é insignificante quando usado em chamadas await assíncronas, uma vez que a intenção é manter o loop até que cada chamada seja resolvida. Eu normalmente só uso for..of` se a ordem de execução assíncrona for importante.
+            Nota: Você também pode usar loops for básicos para obter todos os benefícios de for..of, mas eu gosto da simplicidade e legibilidade que for..of oferece.
+        */
+
+
+    </script>
+</body>
+
+</html>

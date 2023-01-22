@@ -1,0 +1,297 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : DOM Manipulation - Gettin Elements from the Window
+ *                                - Creating new HTML Elements 
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <Style>
+        .linhaErro {
+            background-color: coral;
+        }
+
+        .fadeOut {
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .invisivel {
+            display: none;
+        }
+    </Style>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>Exemplo 999 - Diversos</h1>
+    </header>
+    <main>
+        <div>
+            <label for="inIdFiltro">Filtre:</label>
+            <input type="text" id="inIdFiltro" name="inNmFiltro" placeholder="UserId">
+            <br><br>
+
+            <table border=1 class="tbClUsuarios" id="tbIdUsuarios">
+                <thead id="thIdUsuarios">
+                    <tr class="trClUsuario">
+                        <th class="thClInfoUserId">UserId</th>
+                        <th class="thClInfoSenha">Senha</th>
+                        <th class="thClInfoNome">Nome</th>
+                        <th class="thClInfoCpf">CPF</th>
+                        <th class="thClInfoTipoUser">Tipo Usuario</th>
+                    </tr>
+                </thead>
+                <tbody id="tboIdLinha">
+                    <tr class="trClUsuarioData">
+                        <!--Linha 1-->
+                        <td id="tdIdInfoUserId1" class="tdClInfoUserId">IvanJB</td>
+                        <td class="tdClInfoSenha">Teste123</td>
+                        <td class="tdClInfoNome">Ivan J. Borchardt</td>
+                        <td class="tdClInfoCpf">004.742.879-12</td>
+                        <td class="tdClInfoTipoUser">Desenvolvedor</td>
+                    </tr>
+                    <tr class="trClUsuarioData">
+                        <!--Linha 2-->
+                        <td class="tdClInfoUserId">JoaoTB</td>
+                        <td class="tdClInfoSenha">Teste123</td>
+                        <td class="tdClInfoNome">Joao Alberto</td>
+                        <td class="tdClInfoCpf">004.742.879-15</td>
+                        <td class="tdClInfoTipoUser">Desenvolvedor</td>
+                    </tr>
+                    <tr class="trClUsuarioData">
+                        <!--Linha 3-->
+                        <td class="tdClInfoUserId">MarianaS</td>
+                        <td class="tdClInfoSenha">Teste123</td>
+                        <td class="tdClInfoNome">Mariana Silveira</td>
+                        <td class="tdClInfoCpf">004.742.879-16</td>
+                        <td class="tdClInfoTipoUser">Administrador</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <br>
+        <div>
+            <form id="frmIdAdiciona" action="" method="POST">
+                <label for="inIdUserId">User Id:</label>
+                <input type="text" id="inIdUserId" name="inNmUserId">
+                <br><br>
+
+                <label for="inIdPass">Senha:</label>
+                <input type="text" id="inIdPass" name="inNmPass">
+                <br><br>
+
+                <label for="inIdNome">Nome:</label>
+                <input type="text" id="inIdNome" name="inNmNome">
+                <br><br>
+
+                <label for="inIdCpf">CPF: </label>
+                <input type="text" id="inIdCpf" name="inNmCpf">
+                <br><br>
+
+                <input type="radio" id="inIdTpDes" name="inNmTipoUser" checked value="inIdTpDes">
+                <label for="inIdTpDes">Desenvolvedor</label>
+                <br>
+                <input type="radio" id="inIdTpAna" name="inNmTipoUser" value="inIdTpAna">
+                <label for="inIdTpAna">Analista</label>
+                <br>
+                <input type="radio" id="inIdTpAdm" name="inNmTipoUser" value="inIdTpAdm">
+                <label for="inIdTpAdm">Administrador</label>
+                <br><br>
+
+                <input type="submit" value="Incluir" id="tbIdIncluir">
+                <input type="reset" value="Limpar">
+                <input type="button" value="Validar" id="btIdValidar">
+            </form>
+        </div>
+        
+    </main>
+    <script src="javaScript/getElements.js"></script>
+    <script>
+
+
+        /*
+        * EN: Takes the Form Data and Creates a new line in the Table of users  
+        * BR: Pega os dados do formulário e cria uma nova linha na tabela de usuários
+        * DE: Nimmt die Formulardaten und erstellt eine neue Zeile in der Benutzertabelle  
+        */
+        var btIncluir = document.querySelector("#tbIdIncluir");
+
+        btIncluir.addEventListener('click', function (event) {
+            //prevents the default form behavior (previne o comportamento padrão do formulario) 
+            event.preventDefault();
+
+            //takes the entire Form (captura o formulario completo) 
+            var formulario = document.querySelector("#frmIdAdiciona");
+
+            //getting form data (obtendo os dados do formulario) 
+            var usuario = obtemUsuario(formulario);
+
+            //Create / assemble Table Row (Criar/montar linha) 
+            var usuarioTr = montaTr(usuario);
+
+            //Add row to table (Adiciona linha na tabela)  
+            var tBody = document.querySelector("#tboIdLinha");
+            tBody.appendChild(usuarioTr);
+
+            formulario.reset();
+
+        });
+
+        //getting form data (obtendo os dados do formulario)
+        function obtemUsuario(formulario1) {
+            var usuario = {
+                userId: formulario1.inNmUserId.value,
+                password: formulario1.inNmPass.value,
+                nome: formulario1.inNmNome.value,
+                cpf: formulario1.inNmCpf.value,
+                tipoUser: tipoUser(formulario1.inNmTipoUser.value)
+            }
+            return usuario;
+        }
+
+        //Create / assemble Table Row (Criar/montar linha) 
+        function montaTr(usuario) {
+            var usuarioTr = document.createElement("tr");
+            usuarioTr.classList.add("trClUsuarioData");
+            //adicionar colunas
+            usuarioTr.appendChild(montaTd(usuario.userId, "tdClInfoUserId"));
+            usuarioTr.appendChild(montaTd(usuario.password, "tdClInfoSenha"));
+            usuarioTr.appendChild(montaTd(usuario.nome, "tdClInfoNome"));
+            usuarioTr.appendChild(montaTd(usuario.cpf, "tdClInfoCpf"));
+            usuarioTr.appendChild(montaTd(usuario.tipoUser, "tdClInfoTipoUser"));
+
+            validarCpf(usuario.cpf, usuarioTr);
+            return usuarioTr;
+        }
+
+        //Create / assemble Table Data (Criar/montar coluna) 
+        function montaTd(dado, classe) {
+            var usuarioTd = document.createElement("td");
+            usuarioTd.textContent = dado;
+            usuarioTd.classList.add(classe);
+            return usuarioTd;
+        }
+
+        //If the Field "cpf" are equal Space than the color of the row will be set to red
+        //Caso o "cpf" esteja vazio então a cor da fonte da linha é passada para vermelho 
+        function validarCpf(cpf, usuarioTr) {
+            if (cpf == "") {
+                //Alterando os estilos CSS via JavaScript
+                //------------------------------------------
+
+                //document.getElentById("id-doElemento").style.<property> = <novo valor>
+                //document.getElementById("linhaX").style.backgroundColor = "red"; 
+                usuarioTr.classList.add("linhaErro");
+            }
+            return (cpf);
+        }
+
+        //Convert inIdTp to a Text that represents the type of the user 
+        function tipoUser(idUser) {
+            switch (idUser) {
+                case "inIdTpDes":
+                    return "Desenvolvedor";
+                    break;
+
+                case "inIdTpAna":
+                    return "Analista";
+                    break;
+
+                case "inIdTpAdm":
+                    return "Administrador";
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+
+
+
+
+        var btValidar = document.querySelector("#btIdValidar");
+
+        btValidar.addEventListener('click', function () {
+            console.log("Clicou validar");
+        });
+
+
+
+
+        /*
+        * EN: Filtering Users  
+        * BR: Filtrando os Usuários
+        * DE: Benutzer filtern
+        */
+        var campoFiltro = document.querySelector("#inIdFiltro");
+        campoFiltro.addEventListener("input", function () {
+            console.log(this.value);
+            let usuarios = document.querySelectorAll(".trClUsuarioData");
+            if (this.value.length > 0) {
+                for (let index = 0; index < usuarios.length; index++) {
+                    let usuario = usuarios[index];
+                    let tdUserId = usuario.querySelector(".tdClInfoUserId");
+                    let nome = tdUserId.textContent;
+                    var expressao = new RegExp(this.value, "i");//Regex Expression (Expressão regular) 
+                    if (expressao.test(nome)) {
+                        q
+                        usuario.classList.remove("invisivel");
+                    } else {
+                        usuario.classList.add("invisivel");
+                    }
+                }
+            } else {
+                for (let index = 0; index < usuarios.length; index++) {
+                    var usuario = usuarios[index];
+                    usuario.classList.remove("invisivel");
+                }
+            }
+
+        });
+
+
+        /*
+        * EN: Removing Users from the Table  
+        * BR: Removendo  Usuarios da tabela 
+        * DE: Benutzer aus der Tabelle entfernen
+        */
+        var tabela = document.querySelector("#tboIdLinha");
+
+        tabela.addEventListener("dblclick", function (event) {
+            var confirma;
+
+            confirma = window.confirm("Confirma a Exclusão do Registro?");
+
+            if (confirma) {
+                console.log(event.target);
+                console.log(this);
+
+                //Adiciona a classe CSS fadeOut no pai do elemento clicado 
+                event.target.parentNode.classList.add("fadeOut");
+
+                setTimeout(function () {//Adiciona um delay de 500ms para esperar o fadeOut
+                    event.target.parentNode.remove(); //Depois de 500ms remove a linha da tabela
+                }, 500);
+
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

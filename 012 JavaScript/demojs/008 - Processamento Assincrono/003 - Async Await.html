@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+
+        //Passo 0: Vamos relembrar de como fazemos requisiçoes com uma Promise 
+        function getCEP() {
+            fetch('https://viacep.com.br/ws/89107000/json/')
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (endereco) {
+                    console.log(endereco);
+                });
+        }
+
+        //getCEPAwait()
+
+
+
+        async function getCEPAwait() {
+            var response = await fetch('https://viacep.com.br/ws/89107000/json/')
+            return response.json()
+        }
+
+        (async function () {
+            console.log(await getCEPAwait());
+        })()
+
+
+
+
+
+        //Passo 2: Um async retorna uma promise... 
+        async function getNumero() {
+            return 2;
+        }
+
+        (async function () {
+            var num = await getNumero();
+            console.log(num)
+        })()
+
+
+
+        getNumero()
+            .then(function (num) {
+                varGlobal = num
+                console.log(num);
+            })
+
+
+        getMoedas()
+
+        //Passo 3: Trabalhando com arrays de promises e async/await
+        async function getMoedas() {
+            var resultado = await fetch('https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json');
+            return resultado.json();
+        }
+
+        async function getParidade(moeda) {
+            var resultado = await fetch("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='" + moeda + "'&@dataCotacao='11-18-2020'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim");
+            return resultado.json();
+
+            //return resultado.json();
+        }
+
+        (async function () {
+            var moedas = await getMoedas()
+
+            var paridades = []
+            
+            for (let i = 0; i < moedas.value.length; i++) {
+                paridades.push(getParidade(moedas.value[i].simbolo))
+            }
+        
+
+            //-----------------------------
+            /*
+            moedas.value.forEach(async function (element) {
+                paridades.push(await getParidade(element.simbolo))
+
+                //uma promise normal tambem nao sera respeita.... 
+                //getParidade(element.simbolo).then(function(params) {
+                //    paridades.push(params)
+                //})
+            });
+            */
+            console.log(paridades);
+            var paridadesAll = await Promise.all(paridades)
+            console.log(paridadesAll);
+            //-----------------------------------
+
+
+
+            /*
+            const urls = [
+                'https://jsonplaceholder.typicode.com/todos/1',
+                'https://jsonplaceholder.typicode.com/todos/2',
+                'https://jsonplaceholder.typicode.com/todos/3'
+            ];
+
+            async function getTodos() {
+                await urls.forEach(async function (url, idx) {
+                    const todo = await fetch(url);
+                    console.log(`Received Todo ${idx + 1}:`, todo);
+                });
+
+                console.log('Finished!');
+            }
+
+            getTodos()
+            */
+
+
+        })()
+
+
+    </script>
+
+
+
+</body>
+
+</html>

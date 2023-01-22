@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Criando um Array
+        //Criando um Array Vazio
+
+        var frutas = [] 
+        console.log(typeof(frutas))
+
+        //Array Pré inicializado
+        var carros = ['gol', 'Ka', 'celta', 12]
+
+        //Usando o construtor da classe Array
+        var legumes = new Array('brócolis', 'Cenoura', 'alface')
+
+        carros[1] = "Fiesta"
+
+        console.log(typeof(carros[0]))
+        console.log(carros[1])
+        console.log(carros[2])
+        console.log(typeof(carros[3]))
+
+        for (let index = 0; index < carros.length; index++) {
+            console.log(" - " + index + " - " + carros[index]);
+        }
+
+        console.log("tamanho do array: " + carros.length);
+       
+
+        //inserindo um elemento no final do array
+        carros.push("fusca")
+        carros[8] = "Opala"
+        console.log(carros);
+
+        //inserindo um elemento no inicio do array
+        carros.unshift("A200")
+        console.log(carros)
+
+
+        for (let index = 0; index < carros.length; index++) {
+            console.log(" - " + index + " - " + carros[index]);
+        }
+
+        carros.forEach(minhaFuncao);
+
+        function minhaFuncao(value, index, array){
+            console.log("forEach - " + value + " index: " + index)
+        }
+
+        //Retirando elemento do começo do Array
+        var carro =  carros.shift()
+        console.log(carros)
+        console.log(carro)
+
+        //Retirando o ultimo elemento do array
+        carro = carros.pop()
+        console.log(carros)
+        console.log(carro)
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

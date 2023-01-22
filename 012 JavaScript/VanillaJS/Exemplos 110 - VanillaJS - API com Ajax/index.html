@@ -1,0 +1,289 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : AJAX Samples - Asynchronous JavaScript
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="idUserId">UserId:</label><br>
+        <input type="text" id="idUserId" name="nmUserId">
+        <br><br>
+
+        <label for="idPass">Password:</label><br>
+        <input type="text" id="idPass" name="nmPass">
+        <br><br>
+
+        <label for="idName">Name:</label><br>
+        <input type="text" id="idName" name="nmName">
+        <br><br>
+
+        <label for="idCpf">CPF:</label><br>
+        <input type="text" id="idCpf" name="nmCpf">
+        <br><br>
+
+        <label for="idType">Type:</label><br>
+        <input type="text" id="idType" name="nmType">
+        <br><br>
+
+        <input type="button" value="Insert" onclick="insert()">
+        <input type="button" value="Update" onclick="update()">
+        <input type="button" value="Get by Id" onclick="getById()">
+        <input type="button" value="Get All" onclick="getAll()">
+        <input type="button" value="Delete All" onclick="deleteById()">
+        <input type="reset" value="Limpar">
+    </form>
+
+
+    <input type="button" value="Get Currencies" onclick="getCurrencies()">
+    <input type="button" value="Get Calories" onclick="getCalories()">
+    <input type="button" value="Corona Vírus Stats" onclick="getCovidStatistics()">
+
+
+    <table id="demo"></table>
+
+</body>
+<script>
+
+
+    /*
+    * EN:   
+    * BR: 
+    * DE: 
+    */
+
+
+    function destrincharCotacao(moeda) {
+        console.log(moeda);
+    }
+
+    /*
+    * EN: Calls the Brazilian Central Bank Open Data API to get a list of available currencies  
+    * BR: Chama a API de Dados abertos do Banco Central Brasileiro para pegar uma lista de Moedas disponíveis
+    * DE: Ruft die Open Data API der brasilianischen Zentralbank auf, um eine Liste der verfügbaren Währungen zu erhalten
+    */
+    function getCurrencies() {
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json");
+
+        //onreadystatechange: The onreadystatechange function is called every time the readyState changes
+        //readyState: Holds the status of the XMLHttpRequest.
+        //     0: request not initialized
+        //     1: server connection established
+        //     2: request received
+        //     3: processing request
+        //     4: request finished and response is ready
+        //status
+        //     200: "OK"
+        //     403: "Forbidden"
+        //     404: "Page not found"
+        xhr.onreadystatechange = function () {
+            console.log("Ready State" + xhr.readyState);
+            console.log("Status: " + xhr.status);
+
+        }
+
+
+        // The onload function is called when the readyState is 4   
+        xhr.addEventListener("load", function () {
+
+            var resp = xhr.responseText;
+            //console.log("Response: " + xhr.response);
+            //console.log("ResponseType: " + xhr.responseType);
+            //console.log("URL: " + xhr.responseURL);
+            console.log("Text" + xhr.responseText);
+            //console.log("XML: " + xhr.responseXML);
+
+            var cotacao = JSON.parse(resp);
+
+            console.log(cotacao.value);
+            console.log(typeof cotacao);
+
+            cotacao.value.forEach(element => {
+                destrincharCotacao(element);
+            });
+
+        });
+
+        xhr.send();
+
+
+    }
+
+    function getCovidStatistics() {
+
+
+        const data = null;
+
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+            }
+        });
+
+        xhr.open("GET", "https://rapidapi.p.rapidapi.com/reports?iso=BRA&date=2020-10-30");
+        xhr.setRequestHeader("x-rapidapi-key", "8104697aa2msh0b3c86073722a7ep13a43cjsn8f2919da9d8d");
+        xhr.setRequestHeader("x-rapidapi-host", "covid-19-statistics.p.rapidapi.com");
+
+        xhr.send(data);
+    }
+
+
+    function getCalories() {
+        const data = null;
+
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+            }
+        });
+
+        xhr.open("GET", "https://rapidapi.p.rapidapi.com/parser?ingr=apple");
+        xhr.setRequestHeader("x-rapidapi-key", "8104697aa2msh0b3c86073722a7ep13a43cjsn8f2919da9d8d");
+        xhr.setRequestHeader("x-rapidapi-host", "edamam-food-and-grocery-database.p.rapidapi.com");
+
+        xhr.send(data);
+    }
+
+
+    /***********************************************************************************************
+     * EN: A complete call set to a RESTful API CRUD
+     * BR: Um conjunto de chamadas completo para um CRUD baseado em uma API RESTful  
+     * DE: Ein vollständiger Aufruf einer RESTful API CRUD
+     **********************************************************************************************/
+
+
+    function insert() {
+        var url = "http://localhost:8080/users";
+
+        var usuario = {};
+        usuario.userId = document.getElementById("idUserId").value;
+        usuario.passw = document.getElementById("idPass").value;
+        usuario.name = document.getElementById("idName").value;
+        usuario.cpf = document.getElementById("idCpf").value;
+        usuario.Type = document.getElementById("idType").value;
+
+        var json = JSON.stringify(usuario);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.onload = function () {
+            var users = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "201") {
+                console.table(users);
+            } else {
+                console.error(users);
+            }
+        }
+        xhr.send(json);
+    }
+
+
+    function update() {
+        var url = "http://localhost:8080/users";
+
+        var usuario = {};
+        usuario.userId = document.getElementById("idUserId").value;
+        usuario.passw = document.getElementById("idPass").value;
+        usuario.Name = document.getElementById("idName").value;
+        usuario.cpf = document.getElementById("idCpf").value;
+        usuario.Type = document.getElementById("idType").value;
+
+        var json = JSON.stringify(data);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", url + '/' + usuario.userId, true);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.onload = function () {
+            var users = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                console.table(users);
+            } else {
+                console.error(users);
+            }
+        }
+        xhr.send(json);
+    }
+
+    function getById() {
+        var userId = document.getElementById("idUserId").value;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:8080/users/" + userId);
+
+        xhr.addEventListener("load", function () {
+
+            var resposta = xhr.responseText;
+            var usuario = JSON.parse(resposta);
+
+            console.log(usuario);
+
+            document.getElementById("idUserId").value = usuario.userId;
+            document.getElementById("idPass").value = usuario.passw;
+            document.getElementById("idName").value = usuario.Name;
+            document.getElementById("idCpf").value = usuario.cpf;
+            document.getElementById("idType").value = usuario.Type;
+        });
+
+        xhr.send();
+
+    }
+
+    function getAll() {
+        var url = "http://localhost:8080/users";
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', url, true)
+        xhr.onload = function () {
+            var users = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                console.table(users);
+            } else {
+                console.error(users);
+            }
+        }
+        xhr.send(null);
+    }
+
+
+    function deleteById() {
+        var userId = document.getElementById("idUserId").value;
+
+        var url = "http://localhost:8080/users/";
+        var xhr = new XMLHttpRequest();
+        xhr.open("DELETE", url + userId, true);
+        xhr.onload = function () {
+            var resposta = xhr.responseText;
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                console.log(resposta);
+            } else {
+                console.error(resposta);
+            }
+        }
+        xhr.send(null);
+    }
+
+
+</script>
+
+</html>

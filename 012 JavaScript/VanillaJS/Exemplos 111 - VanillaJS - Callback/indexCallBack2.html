@@ -1,0 +1,55 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : VanillaJS - Callback Functions
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <input type="button" onclick="cotacao()" value="Pegar Moedas">
+    </head>
+    <body>
+
+        <Script>
+
+            function pegarTexto(xhr, callback) {
+                var resposta;
+                xhr.addEventListener("load", function(){
+                    resposta = xhr.responseText;
+                    callback(resposta);
+                });
+                 
+                //return resposta; 
+            }
+
+            function converterJson(resposta){
+                var cotacao = JSON.parse(resposta); 
+            }
+
+            function cotacao() {
+                var xhr = new XMLHttpRequest(); 
+
+                xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json");
+                //xhr.open("GET", "https://api-pacientes.herokuapp.com/pacientes");
+
+                ////////var resposta = xhr.responseText;
+                pegarTexto(xhr, converterJson); 
+
+                /////var cotacao = JSON.parse(resposta); 
+                ///converterJson(resposta);
+            
+                console.log(cotacao.value);
+                console.log(typeof cotacao);
+
+                xhr.send();
+
+            }
+        </Script>    
+    </body>
+</html>

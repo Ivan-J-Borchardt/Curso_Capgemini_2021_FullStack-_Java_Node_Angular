@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Exemplo de acesso à arquivos CSS -->
+    <link rel="stylesheet" href="http://localhost:3001/css/estilos.css">
+    <!--  <link rel="stylesheet" href="css/estilos.css"> -->
+</head>
+
+<body>
+    <div>
+        <h1> Meus Livros Favoritos 3.1 </h1>
+        <label for="idCod">cod.</label><br>
+        <input type="number" id="idCod">
+        <br><br>
+        <label for="idAutor">Autor: </label><br>
+        <input type="text" id="idAutor" placeholder="Nome do Autor">
+        <br><br>
+        <label for="idLivro">Livro</label><br>
+        <input type="text" id="idLivro" placeholder="Nome Do Livro">
+        <br><br>
+        <label for="idFoto">Foto</label><br>
+        <input type="text" id="idFoto" placeholder="Nome Do Arq. Foto...">
+        <br><br>
+        <button type="button" id="btn">salvar - Rota Dinâmica</button>
+        <button type="button" id="btnSalvarPost">salvar - POST</button>
+        <button type="button" id="btnConsultar">consultar</button>
+    </div>
+
+
+
+    <!--  Exemplo de acesso à recursos de mídia quando o Frontende é servido pelo NODE -->
+    <img id="idImagem" src="img/autolah.jpg" alt="" width="15%">
+
+    <!--  Exemplo de acesso à recursos de mídia quando o Frontende é desenvolvido em um 
+        projeto desacoplado do Backende -->
+    <img id="idImagem" src="http://localhost:3001/img/joinha.jpg" alt="" width="15%">
+
+    <!--  Alternativamente pode-se hospedar os recursos de mídia em um terceiro servidor --> 
+    <img id="idImagem" src="https://ivan-j-borchardt.github.io/imagens/joinha.jpg" alt="" width="15%">       
+    
+</body>
+
+<!-- Exemplo de acesso a arquivos javaScript -->
+<script src="js/log.js"></script>
+
+<script>
+
+
+    //Buscando dados do cadastro no arquivo--- 
+    const btnConsultar = document.getElementById("btnConsultar")
+
+    btnConsultar.onclick = async function () {
+        let cod = Number(document.getElementById("idCod").value)
+
+        livro = await getLivro(cod);
+        console.log(livro[2]);
+
+        document.getElementById("idLivro").value = livro[0]
+        document.getElementById("idAutor").value = livro[1]
+        document.getElementById("idImagem").src = livro[2]
+
+    }
+
+    async function getLivro(cod) {
+        var response = await fetch(`http://localhost:3001/livros/${cod}`)
+        return response.json()
+    }
+
+
+
+    //Salvar dados do cadastro no arquivo método 1. 
+    //-------------------------------------------------
+    const btnSalvar = document.getElementById("btn")
+
+    btnSalvar.onclick = async function () {
+        //pegar dados da tela 
+        var autor = document.getElementById("idAutor").value
+        var titulo = document.getElementById("idLivro").value
+        //fazer uma requisição ao Backend para salvar os dados (/livros - POST)
+        let resposta = await salvarLivro(autor, titulo)
+        console.log(resposta);
+    }
+
+
+
+    async function salvarLivro(autor, titulo) {
+        var response = await fetch(`http://localhost:3001/livros/${autor}/${titulo}`)
+
+        return response
+    }
+
+    //Salvar dados do cadastro no arquivo, método 2.
+    //-------------------------------------------------------------------
+
+    const btnSalvarPost = document.getElementById("btnSalvarPost")
+
+    btnSalvarPost.onclick = async function () {
+        const update = {
+            nmAutor: document.getElementById("idAutor").value,
+            nmLivro: document.getElementById("idLivro").value,
+            nmFoto: document.getElementById("idFoto").value
+        };
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(update),
+        };
+
+        let response = await salvarPost(options)
+        console.log(response);
+    }
+
+    async function salvarPost(options) {
+        let response = await fetch('http://localhost:3001/livros', options)
+        return response.json()
+    }
+
+
+
+
+</script>
+
+</html>

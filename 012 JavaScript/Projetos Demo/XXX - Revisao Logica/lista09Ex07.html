@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<body>
+
+    <label for="idTemp">Temperatura</label><br>
+    <input type="number" id="idTemp" step="0.01">
+    <select name="nmUnidadeOrigem" id="idUnidadeOrigem">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+    </select>
+    Converter para
+    <select name="nmUnidadeConvertido" id="idUnidadeConvertido">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+    </select>
+    <input type="number" id="idTempConvertido" step="0.01" disabled>
+    <button type="button" id="btnConverter">Converter</button>
+
+    <script>
+
+        var btnConverter = document.getElementById("btnConverter")
+
+        btnConverter.onclick = function () {
+            let tempEntrada = Number(document.getElementById("idTemp").value)
+            let unidadeEntrada = document.querySelector("#idUnidadeOrigem").value
+            let unidadeConvesao = document.querySelector("#idUnidadeConvertido").value
+
+            //Conversao da unidade de entrada para Celsius 
+            let tempCesius
+
+            switch (unidadeEntrada) {
+                case "C" :
+                    tempCesius = tempEntrada
+                    break;
+
+                case "F" : 
+                    tempCesius = (tempEntrada * 5 - 160) / 9
+                    break;
+
+                case "K" : 
+                    tempCesius = tempEntrada - 273
+                    break;
+
+                default:
+                    break;
+            }
+
+            //Conversao de celsius para a unidade de saida 
+            let tempConvertido
+            switch (unidadeConvesao) {
+                case "C" : 
+                    tempConvertido = tempCesius
+                    break;
+                case "F" : 
+                    tempConvertido = (9 * tempCesius + 160)/5
+                    break;
+                case "K" :
+                    tempConvertido =  tempCesius + 273
+                    break;
+                default:
+                    break;
+            }
+
+            document.getElementById("idTempConvertido").value = tempConvertido
+
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

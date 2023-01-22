@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Document</title>
+    <style>
+        div {
+            border : 1px;
+            border-style: solid;
+            margin: 5px;
+            padding: 7px;
+        }   
+    </style>
+</head>
+<body>
+    <!--  Cadastro de Alunos -->
+    <div id="idCadastroAluno">
+        <h1>Cadastro de Alunos</h1>
+        <label for="idAluno">Aluno: </label><br>
+        <input type="text" id="idAluno">
+        <br><br>
+        <label for="idMae">Mae:</label><br>
+        <input type="text" id="idMae">
+        <br><br>
+        <label for="idPai">Pai:</label><br>
+        <input type="text" id="idPai">
+        <br><br>
+        <input type="button" value="Cadastrar" onclick="cadastrarAluno()">
+        <input type="button" value="Cancelar" onclick="limparTela()">
+    </div>
+    <!-- Cadastro de Notas -->
+    <div id="idCadastroNotas">
+        <br><br>
+        <h1>Cadastro de Notas</h1>
+        <br><br>
+        <label for="idCod1">Cod. Aluno:</label>
+        <input type="number" id="idCod1">
+        <br><br>
+        <label for="idNota1">Nota 1:</label><br>
+        <input type="number" id="idNota1" step="0.01">
+        <br><br>
+        <label for="idNota2">Nota 2:</label><br>
+        <input type="number" id="idNota2" step="0.01">
+        <br><br>
+        <input type="button" value="Cadastrar" onclick="cadastrarNotas()">
+        <input type="button" value="Cancelar" onclick="limparTelaNotas()">
+    </div>
+    <!-- Consulta de Cadastro/Histórico-->
+    <div id="idConsulta">
+        <br><br>
+        <h1>Consulta Cadastro</h1>
+        <br><br>
+        <label for="idCod">Cod. Aluno:</label>
+        <input type="number" id="idCod">
+        <br><br>
+        <button type="button" onclick="consultar()">Consultar</button>
+        <br><br>
+        <output id="idOutAluno"></output>
+        <br>
+        <output id="idOutMae"></output>
+        <br>
+        <output id="idOutPai"></output>
+        <br>
+        <output id="idOutNota1"></output>
+        <br>
+        <output id="idOutNota2"></output>
+        <br>
+        <output id="idOutMedia"></output>
+        <br>
+        <output id="idOutSituacao"></output>
+
+    </div>
+
+
+    <script>
+        let alunos = []
+        let maes = []
+        let pais = []
+        let notas1 = []
+        let notas2 = []
+
+        function cadastrarAluno(){
+            alunos.push(document.getElementById("idAluno").value)
+            maes.push(document.getElementById("idMae").value)
+            pais.push(document.getElementById("idPai").value)
+            
+            limparTela()
+        
+        }
+
+        function limparTela(){
+            document.getElementById("idAluno").value = ""
+            document.getElementById("idMae").value = ""
+            document.getElementById("idPai").value = ""
+        }
+
+
+        function cadastrarNotas(){
+            let cod = Number(document.getElementById("idCod1").value)
+
+            notas1[cod] = (Number(document.getElementById("idNota1").value))
+            notas2[cod] = (Number(document.querySelector("#idNota2").value))
+
+            console.log(notas1);
+            console.log(notas2);
+
+            limparTelaNotas()
+        }
+
+        function limparTelaNotas(){
+            document.getElementById("idNota1").value = ""
+            document.querySelector("#idNota2").value = ""
+        }
+
+        function consultar(){
+            let cod = Number(document.getElementById("idCod").value)
+
+            document.getElementById("idOutAluno").value = "Nome Aluno: " + alunos[cod]
+            document.getElementById("idOutMae").value =   "Nome Mae  : " + maes[cod]
+            document.getElementById("idOutPai").value =   "Nome Pai  : " + pais[cod]
+            document.getElementById("idOutNota1").value = "Nota1     : " + notas1[cod]
+            document.getElementById("idOutNota2").value = "Nota2     : " + notas2[cod]
+            let media = (notas1[cod] + notas2[cod])/2
+            document.getElementById("idOutMedia").value = "Média     : " + media
+            let msn
+            if (media >= 7) {
+                msn = "Situação: Aprovado"
+            } else {
+                msn = "Situação: Reprovado"
+            }
+            document.getElementById("idOutSituacao").value = msn
+
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="radio" id="idResul" name="nmRadio">
+        <label for="idResul">Resultado</label>
+        <br>
+        <input type="radio" id="idRelatorio" name="nmRadio">
+        <label for="idRelatorio">Relatorio</label>
+        <br>
+        <input type="button" value="Mostar" id="idbtn">
+    </div>
+
+    <script>
+
+        var btn = document.getElementById("idbtn")
+        btn.onclick = function(param) {
+            let paramOp1 = document.getElementById("idResul").checked
+            let paramOp2 = document.getElementById("idRelatorio").checked
+
+            if (paramOp1) {
+                somar(3, 4, mostrarResultado)
+
+            } else if(paramOp2){
+                somar(3, 4, mostrarRelatorio)
+            }
+        }
+
+
+        function mostrarResultado(resl) {
+            console.log(resl);
+        }
+
+        function mostrarRelatorio(resl) {
+            console.log("Resultado : " + resl);
+        }
+
+        function somar(a, b, callback) {
+            let resultado = a + b
+            callback(resultado)
+        }
+
+
+
+    </script>
+
+
+</body>
+
+</html>

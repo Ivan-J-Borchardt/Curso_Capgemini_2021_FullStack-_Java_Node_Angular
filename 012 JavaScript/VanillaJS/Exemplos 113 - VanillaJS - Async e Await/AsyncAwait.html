@@ -1,0 +1,96 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : VanillaJS - Async and Await
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <Script>
+            function getCEP(){
+                //https://viacep.com.br/ws/89107000/json/
+                fetch('https://viacep.com.br/ws/89107000/json/')
+                    .then(function(data) {
+                        return data.json()
+                    })
+                    .then(function(endereco){
+                        console.log(endereco);       
+                    });
+            }
+
+            async function getPost(){
+                var resultado = await fetch('https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json');
+                //var dados = await resultado.json();
+                //console.log(dados.cep);
+                return resultado.json(); 
+            }
+
+
+            //getCEP(); 
+           // console.log(getPost()); //.then(console.log);
+            
+            
+            (async function(){ //função auto-invocada
+                var posts = await getPost();
+                console.table(posts.value);
+                console.log("Executou esta linha... "); 
+            }())
+            
+
+            //Um async retorna uma promise 
+            async function getNumero(){
+                return await 2;
+            }
+            
+            console.log(getNumero()); //isso retorna uma promisse pendente
+
+            getNumero().then(console.log); 
+
+            
+            // (async function(){ //função auto-invocada
+            //     var posts = await getNumero();
+            //     console.log(posts);
+            // }())
+             
+            //https://www.youtube.com/watch?v=mTLg2qd9r0M
+
+            
+
+            async function getParidade(moeda){
+                var resultado = await fetch("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='11-18-2020'&$top=100&$format=json&$select=paridadeCompra");
+                //var dados = await resultado.json();
+                //console.log(dados.cep);
+                return resultado.json(); 
+            }
+
+            (async function(){
+                var moedas = await getPost();
+                var paridades = [];
+                
+                for (let index = 0; index < moedas.value.length; index++) {
+
+                    //console.log(moedas.value[index])
+                    //paridades.push(await getParidade(moedas.value[index].simbolo))
+                    paridades.push(getParidade(moedas.value[index].simbolo))
+                    
+                }
+                // moedas.value.forEach(moeda => {
+                //     paridades.push(await getParidade(moeda.simbolo))
+                // });
+                var paridadesAll = await Promise.all(paridades);
+                console.log(paridadesAll); 
+            } ());
+
+
+        </Script>
+    </body>
+</html>

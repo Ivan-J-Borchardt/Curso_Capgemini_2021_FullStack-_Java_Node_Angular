@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+
+<body>
+
+    <Script>
+
+        /*
+        Pendente: Quando a requisição acabou de ser despachada 
+        Realizado: Quando o resultado da requisição foi retornado COM SUCESSO 
+        Reijeitado: Quando o resultado da requisição foi retornado com erro/problema
+        Estabelecido: É o estado final independe se foi realizada ou rejeitada
+        */
+
+
+        //Estado realizado (Fulfilled)
+        function promiseRealizada() {
+            return Promise.resolve("Promise resolvida")
+        }
+
+
+        promiseRealizada().then(function (params) {
+            console.log(params) //Ação executa quando a promise é resolvida/realizada
+        })
+
+
+        //Estado Rejeitada (Rejected)
+        function promiseRejeitada() {
+            return Promise.reject("Promise rejeitada - Deu pau no servidor....")
+        }
+
+
+        promiseRejeitada().catch(function (params) {
+            console.log(params)
+        })
+
+
+        //Criar Promises 
+        contarTempo().then(function (params) {
+            console.log(params);
+        })
+
+        function contarTempo() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve("nova promise resolvida")
+                }, 1000)
+            });
+        }
+
+        //Exemplo com callback 
+        contarTempoCB(mostarResultado)
+
+        function mostarResultado(params) {
+            console.log(params);
+        }
+
+        function contarTempoCB(callback) {
+            setTimeout(function () {
+                callback("terminou de contar tempo...")
+            }, 1000)
+        }
+
+
+        //Consumo de promises
+
+        buscarCEP();
+
+        function buscarCEP() {
+            fetch('https://viacep.com.br/ws/30130002/json/')
+                .then(function (dado) {
+                    dado.json()
+                        .then(function (end) {
+                            console.log(end.localidade);
+                        })
+                })
+    
+        }
+
+
+
+
+        buscarCEP2()
+
+        function buscarCEP2() {
+            fetch('https://viacep.com.br/ws/30130002/json/')
+                .then(function (dado) {
+                    return dado.json()
+                })
+                .then(function (end) {
+                    console.log(end) //tratamento do endereço
+                })
+                .catch(function (erro) {
+                    console.log("Erro ao buscar o CEP: " + erro);
+                })
+                .finally(function () {
+                    console.log("Esta tarefa sempre será executada");
+                })
+        }
+
+     
+
+
+
+        /*
+            1. Passo: terminar a busca de todos os termos como montado acima
+            2. Passo: refatorar o código extraindo o fetch para uma função a parte (retorne o resultado do fetch)
+            3. Passo: passar o print do resultado para dentro da função criada anteriormente
+            4. Passo: ...
+        
+        
+        */
+
+
+
+
+    </Script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : JSObjects vs. JSON
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+    </body>
+    <Script>
+
+        //Criando um objeto JavaScript
+        var usuarioObj = {
+            nome : "Angela", 
+            idade: 25,
+            cidade: "Blumenau"
+        }; 
+
+        //Transforma um objeto JS em JSON 
+        var usuarioJSON = JSON.stringify(usuarioObj); 
+
+        console.log("OBJ: " + usuarioObj);
+        console.log("JSON: " + usuarioJSON);
+        
+        //Transforma um JSON em Objeto JS
+        var usuarioObj2 = JSON.parse(usuarioJSON); 
+
+        console.log(usuarioObj2.nome); 
+
+    </Script>
+</html>

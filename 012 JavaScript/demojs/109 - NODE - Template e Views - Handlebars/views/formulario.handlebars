@@ -1,0 +1,23 @@
+<form action="">
+    <p>-Valor do Dolar Hoje-</p>
+    <label for="idNome">Valor: </label>
+    <input type="text" id="idValor" name="nmValor">
+
+    <input type="submit" value="Enviar">
+
+    <p>Resposta A: {{respostaA}}</p>
+    <p>Resposta B: {{respostaB}}</p>
+    <p>Resposta C: {{respostaC}}</p>
+
+    {{# if condicao}}
+        Condicao Verdadeira 
+    {{else}}
+        Condicao Falsa
+    {{/if}}
+
+    {{# each vetor as |val key|}}
+        {{ this }}
+        {{ key }}:{{ val }}
+    {{/each}}
+
+</form>

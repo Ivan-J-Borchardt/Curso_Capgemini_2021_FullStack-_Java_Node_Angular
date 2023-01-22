@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <label for="idIdade">Idade</label><br>
+    <input type="number" id="idIdade">
+    <br><br>
+    <input type="radio" id="idFem" name="nmSexo" checked>
+    <label for="idFem">Feminino</label>
+    <br>
+    <input type="radio" id="idMasc" name="nmSexo">
+    <label for="idMasc">Masculino</label>
+    <br><br>
+    <button type="button" id="idBtn">Checar</button>
+    <button type="button" id="idBtnContar">Contar</button>
+    <br><br>
+    <output id="idOut"></output>
+    <br><br>
+    <output id="idOutContar"></output>
+
+    <script>
+
+        var btnChecar = document.getElementById("idBtn")
+
+        btnChecar.addEventListener("click", function() {
+            var idade = Number(document.getElementById("idIdade").value)
+            var isFem = document.getElementById("idFem").checked 
+            var isMasc = document.getElementById("idMasc").checked
+            var msn 
+
+            if (isFem) {
+                if (idade >= 55) {
+                    msn = "(Feminino): Pode Aposentar"
+                } else {
+                    msn = "(Feminino): Não Pode Aposentar"
+                }
+            } else {
+                if (idade >= 65) {
+                    msn = "(Masculino): Pode Aposentar"
+                } else {
+                    msn = "(Masculino): Não Pode Aposentar"
+                } 
+            }
+            
+            document.getElementById("idOut").value = msn
+
+        })
+
+
+        var btnContar = document.getElementById("idBtnContar")
+
+        btnContar.onclick = function () {
+
+            let outContar = document.getElementById("idOutContar")
+            for (let i = 0; i < 101; i++) {
+                
+                if ((i % 3) == 0 || (i % 5) == 0) {
+                    outContar.value = outContar.value + " " + i 
+                    
+                }  
+            }
+
+            var cont = 0
+            while (cont < 101) {
+                outContar.value = outContar.value + " " + cont
+                cont += 2
+            }
+
+        }
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        piada1()
+
+        function piada1() {
+            buscarPiada("spider", piada2)
+        }
+
+        function piada2(textoPiada) {
+            console.log(textoPiada)
+            buscarPiada("ghost", piada3)
+        }
+
+        function piada3(textoPiada) {
+            console.log(textoPiada)
+            buscarPiada("pizza", piada4)
+        }
+
+        function piada4(textoPiada) {
+            console.log(textoPiada)
+            buscarPiada("wolf", piada5)
+        }
+
+        function piada5(textoPiada) {
+            console.log(textoPiada)
+            buscarPiada("ant", imprimirPiada)       
+        }
+
+        function imprimirPiada(textoPiada) {
+            console.log(textoPiada)
+        }
+
+        function buscarPiada(termo, callback) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "https://icanhazdadjoke.com/search?term=" + termo);
+            xhr.setRequestHeader('Accept', 'application/json');
+
+            xhr.addEventListener("load", function () {
+                var resposta = JSON.parse(xhr.responseText);
+                //console.log(resposta.results[0].joke);
+                callback(resposta.results[0].joke)
+            });
+
+            xhr.send();
+        }
+
+
+    </script>
+
+</body>
+
+</html>

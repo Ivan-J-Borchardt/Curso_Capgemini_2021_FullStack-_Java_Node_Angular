@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo das Capitais</title>
+
+    <style>
+        div {
+            margin: 5px;
+            padding: 5px;
+            border: 1px;
+            border-style: solid;
+        }
+
+        .esconder {
+            display: none
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div>
+        <div id="idTelaOnboard">
+            <h3>Onbord dos Jogadores</h3>
+            <br>
+            <label for="idJogador">Jogador </label>
+            <br>
+            <input type="text" id="idJogador" placeholder="Nome do Jogador">
+            <br><br>
+            <input type="button" id="btnAddJog" value="Add Jogador">
+            <input type="button" id="btnIniciar" value="Iniciar Jogo" disabled>
+
+        </div>
+
+        <div id="idTelaJogo" class="esconder">
+            <h3>Jogo das Capitais</h3>
+            <br>
+            <output id="idOutJogador">Jogador: </output>
+            <br><br>
+            <output id="idOutPergunta">Pergunta: </output>
+            <br><br>
+            <label for="idResposta">Resposta</label>
+            <br>
+            <input type="text" id="idResposta" placeholder="Capital???">
+            <br><br>
+            <input type="button" id="btnRodada"    value="Nova Rodada">
+            <input type="button" id="btnResponder" value="Responder" disabled>
+            <input type="button" id="btnFinalizar" value="Finalizar" disabled>
+
+        </div>
+
+        <div id="idTelaResult" class="esconder">
+            <h3>Placar Geral</h3>
+        </div>
+
+    </div>
+
+    <script>
+
+        var indJog = 0
+        var indEstado
+
+        var jogadores = []
+        var pontos = []
+
+        var estados = [
+            "Acre",
+            "Alagoas",
+            "Amapá",
+            "Amazonas",
+            "Bahia",
+            "Ceará",
+            "Distrito Federal",
+            "Espírito Santo",
+            "Goiás",
+            "Maranhão",
+            "Mato Grosso",
+            "Mato Grosso do Sul",
+            "Minas Gerais",
+            "Pará",
+            "Paraíba",
+            "Paraná",
+            "Pernambuco",
+            "Piauí",
+            "Rio de Janeiro",
+            "Rio Grande do Norte",
+            "Rio Grande do Sul",
+            "Rondônia",
+            "Roraima",
+            "Santa Catarina",
+            "São Paulo",
+            "Sergipe",
+            "Tocantins"
+        ]
+
+        var capitais = [
+            "Rio Branco",
+            "Maceió",
+            "Macapá",
+            "Manaus",
+            "Salvador",
+            "Fortaleza",
+            "Brasília",
+            "Vitória",
+            "Goiânia",
+            "São Luís",
+            "Cuiabá",
+            "Campo Grande",
+            "Belo Horizonte",
+            "Belém",
+            "João Pessoa",
+            "Curitiba",
+            "Recife",
+            "Teresina",
+            "Rio de Janeiro",
+            "Natal",
+            "Porto Alegre",
+            "Porto Velho",
+            "Boa Vista",
+            "Florianópolis",
+            "São Paulo",
+            "Aracaju",
+            "Palmas"
+        ]
+
+        //Onbord dos Jogadores 
+        var btnAddJog = document.getElementById("btnAddJog")
+
+        btnAddJog.onclick = function() {
+            let jogador = document.getElementById("idJogador")
+
+            if (jogador.value.trim() == "") {
+                alert("Informe o nome do jogador")
+  
+            }else{
+                jogadores.push(jogador.value)
+                pontos.push(0)
+                jogador.value = ""
+                if (jogadores.length == 4) {
+                    jogador.disabled = true 
+                    btnAddJog.disabled = true
+                    iniciarJogo() //Inicia o jogo automaticamente
+                    document.getElementById("btnIniciar").disabled = true
+                }
+                if (jogadores.length > 1) {
+                    document.getElementById("btnIniciar").disabled = false
+                }
+
+                
+            }
+            jogador.focus()
+
+            
+        }
+       
+        //Inicia Jogo 
+        var btnIniciar = document.getElementById("btnIniciar")
+
+        btnIniciar.onclick = function() {
+            iniciarJogo()
+        }
+
+
+
+        //Jogador Responde à pergunta
+        var btnResponder = document.getElementById("btnResponder")
+
+        btnResponder.onclick = function() {
+            let resposta = document.getElementById("idResposta").value
+
+            if (resposta == capitais[indEstado]) {
+                pontos[indJog]++
+            }
+            
+            indJog++
+
+            if (indJog == jogadores.length) {
+                indJog = 0 //Inicia a próxima rodada 
+                btnResponder.disabled = true
+                btnRodada.disabled = false
+                btnFinalizar.disabled = false
+            }
+            
+            montarTela()
+
+        }
+
+        //Finalizar Jogo 
+        var btnFinalizar = document.getElementById("btnFinalizar")
+
+        btnFinalizar.onclick = function() {
+            document.getElementById("idTelaJogo").classList.add("esconder")
+            document.getElementById("idTelaResult").classList.remove("esconder")
+
+            ordenarResult()
+
+            let telaResult = document.getElementById("idTelaResult")
+            for (let i = 0; i < jogadores.length; i++) {
+                let p = document.createElement("p")
+                p.innerText = (i + 1) + ". colocado: " + jogadores[i] + " - " + pontos[i]
+                telaResult.appendChild(p)
+            }
+
+        }
+
+        //Abre Rodada
+        var btnRodada = document.getElementById("btnRodada")
+
+        btnRodada.onclick = function() {
+            btnResponder.disabled = false
+            btnFinalizar.disabled = true
+            btnRodada.disabled = true
+        }
+
+
+        //Funções gerais...
+
+        function iniciarJogo() {
+            document.getElementById("idTelaOnboard").classList.add("esconder")
+            document.getElementById("idTelaJogo").classList.remove("esconder")
+            montarTela()
+
+        }
+
+        function montarTela() {
+            document.getElementById("idOutJogador").value = "Jogador: " + jogadores[indJog]
+            indEstado = sortearEstado()
+            document.getElementById("idOutPergunta").value = "Pergunta: " + estados[indEstado]
+            let campoResposta = document.getElementById("idResposta")
+            campoResposta.value = ""
+            campoResposta.focus()
+        }
+
+        function sortearEstado(){
+            return (Math.random() * 26).toFixed()
+        }
+
+        function ordenarResult() {
+            
+            let trocou = true
+            while (trocou) {
+                trocou = false
+                for (let i = 0; i < (jogadores.length -1); i++) {
+                    
+                    if (pontos[i] < pontos[i + 1]) {
+                        let tempPontos = pontos[i]
+                        pontos[i] = pontos[i + 1]
+                        pontos[i + 1] = tempPontos
+                        let jogTemp = jogadores[i]
+                        jogadores[i] = jogadores[i + 1]
+                        jogadores[i + 1] = jogTemp
+                        trocou = true
+                    }
+                    
+                }
+            }
+
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>

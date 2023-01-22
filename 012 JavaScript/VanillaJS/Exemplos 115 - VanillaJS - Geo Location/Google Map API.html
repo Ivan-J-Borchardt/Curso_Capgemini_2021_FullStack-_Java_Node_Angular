@@ -1,0 +1,46 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : VanillaJS - Google Maps API (in construction)
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <!-- Contâiner que irá receber o mapa -->
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtK3LwttZ9RovRJsvIblpvdCtD8Eq1AwQ&callback=initialize" async defer></script>
+    <script>
+
+
+        function initialize() {
+            console.log("inicializando mapa");
+            var mapOptions = {
+                center: new google.maps.LatLng(0, 0),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),{
+                center: {lat: 0, lng: 0}, 
+                zoom : 8
+            
+            });
+            console.log(map); 
+        }
+        //https://www.devmedia.com.br/introducao-a-google-maps-api/26967
+        //https://www.youtube.com/watch?v=HgayBu0FSjA&list=PLfeu5i2CGb0sDdiR_RpWbH-758luP3_fj&index=2
+    </script>
+</body>
+
+</html>

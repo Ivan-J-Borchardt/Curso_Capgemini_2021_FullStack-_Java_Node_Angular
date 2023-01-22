@@ -1,0 +1,46 @@
+(npm - Node Package Manager)
+yarn - ???
+
+No prompt, dentro da pasta da aplicação digitar: 
+
+Verificando se o npm está instalado
+==============================================
+>npm -v 
+//retorna a versão no npm instalado, se instalado...
+
+Configurar o Projeto para ser um Projeto Node
+===============================================
+>npm init   
+
+
+Instalando o pacote express 
+================================================
+npm install express@4.16.3 --save-exact
+
+
+Baixar todas as dependencias do projeto
+===============================================
+Para compartilhar o projeto, apagar a pasta nome_modules do projeto,
+dessa forma, ao instalar o projeto em outro SO, basta baixar as 
+dependencias novamente para manter a compatibilidade de SO
+
+>npm install 
+
+Instalando o nodemon
+===============================================
+O Nodemon possibilita que se teste alterações no server.js sem a necessidade 
+de reiniciar o servidor.
+
+npm install nodemon -g
+
+*** O -g significa que a instalação será global e não apenas no projeto 
+
+**** Chamar o server.js com o Nodemon: >nodemon  server.js
+
+
+Instalando o Body-parser
+================================================
+O body-parser é usado para acesar os parametros enviados no corpo da requisição
+
+
+npm install body-parser --save

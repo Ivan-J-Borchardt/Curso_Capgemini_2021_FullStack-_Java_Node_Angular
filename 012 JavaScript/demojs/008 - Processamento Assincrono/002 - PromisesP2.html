@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        // buscarPiada()
+
+        function buscarPiada() {
+            const param = { headers: { Accept: 'application/json' } }
+            fetch("https://icanhazdadjoke.com/search?term=spider", param)
+                .then(function (response) {
+                    response.json()
+                        .then(function (dado) {
+                            console.log(dado.results[0].joke)
+                            fetch("https://icanhazdadjoke.com/search?term=ghost", param)
+                                .then(function (response) {
+                                    response.json()
+                                        .then(function (dado) {
+                                            console.log(dado.results[0].joke)
+                                            fetch("https://icanhazdadjoke.com/search?term=pizza", param)
+                                                .then(function (response) {
+                                                    response.json()
+                                                        .then(function (dado) {
+                                                            console.log(dado.results[0].joke)
+                                                            fetch("https://icanhazdadjoke.com/search?term=wolf", param)
+                                                                .then(function (response) {
+                                                                    response.json()
+                                                                        .then(function (dado) {
+                                                                            console.log(dado.results[0].joke)
+                                                                            fetch("https://icanhazdadjoke.com/search?term=ant", param)
+                                                                                .then(function (response) {
+                                                                                    response.json()
+                                                                                        .then(function (dado) {
+                                                                                            console.log(dado.results[0].joke)
+                                                                                        })
+                                                                                })
+                                                                        })
+                                                                })
+                                                        })
+                                                })
+                                        })
+                                })
+                        })
+                })
+
+        }
+
+        //Passo 2. Extrair os fetch para uma funcao separada 
+
+        //buscarPiada2()
+
+        function chamarFetch(termo) {
+            const param = { headers: { Accept: 'application/json' } }
+            return
+            fetch("https://icanhazdadjoke.com/search?term=" + termo, param)
+                .then(function (response) {
+                    return response.json()
+                })
+
+
+
+
+        }
+
+
+        function buscarPiada2() {
+            chamarFetch("spider").then(function (dado) {
+                console.log(dado.results[0].joke)
+                chamarFetch("ghost").then(function (dado) {
+                    console.log(dado.results[0].joke)
+                    chamarFetch("pizza").then(function (dado) {
+                        console.log(dado.results[0].joke)
+                        chamarFetch("wolf").then(function (dado) {
+                            console.log(dado.results[0].joke)
+                            chamarFetch("ant").then(function (dado) {
+                                console.log(dado.results[0].joke)
+                            })
+                        })
+
+                    })
+
+                })
+
+            })
+
+
+
+        }
+
+
+
+        //buscarPiada2()
+
+        function chamarFetchX(termo) {
+            const param = { headers: { Accept: 'application/json' } }
+            return new Promise(function (resolve, reject) {
+                fetch("https://icanhazdadjoke.com/search?term=" + termo, param)
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (dado) {
+                        console.log(dado.results[0].joke)
+                        resolve()
+                    })
+            })
+            
+        }
+
+
+        function buscarPiadaX() {
+            chamarFetchX("spider")
+            .then(() => chamarFetchX("ghost"))
+            .then(() => chamarFetchX("pizza"))
+            .then(() => chamarFetchX("wolf"))
+            .then(() => chamarFetchX("ant"))
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //passo 3. Levar a impressao (console.log) para dentro da funcao
+
+        
+
+        function chamarFetch3(termo) {
+            const param = { headers: { Accept: 'application/json' } }
+            return new Promise(function (resolve, reject) {
+                fetch("https://icanhazdadjoke.com/search?term=" + termo, param)
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (dado) {
+                        console.log(dado.results[0].joke)
+                        resolve()
+                    })
+
+            })
+        }
+
+
+        function buscarPiada3() {
+            chamarFetch3("spider")
+                .then(() => chamarFetch3("ghost"))
+                .then(() => chamarFetch3("pizza"))
+                .then(() => chamarFetch3("dog"))
+                .then(() => chamarFetch3("wolf"))
+                .then(() => chamarFetch3("ant"))
+                .catch(error => console.log(error))
+        }
+
+
+      
+        buscarPiada4()
+    
+
+        async function buscarPiada4() {
+            try {
+                await chamarFetch3("spider")
+                await chamarFetch3("ghost")
+                await chamarFetch3("pizza")
+                console.log("linha 2");
+                await chamarFetch3("dog")
+                await chamarFetch3("wolf")
+                await chamarFetch3("ant")
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

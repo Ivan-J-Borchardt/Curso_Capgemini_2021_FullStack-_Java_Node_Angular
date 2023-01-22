@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //No JS, uma matriz nada mais é do que um Array de Arrays...
+        var matriz = [
+            ["linha1 - Col1", "linha1 - Col2", "linha1 - Col3"],
+            ["linha2 - Col1", "linha2 - Col2", "linha2 - Col3"],
+            ["linha3 - Col1", "linha3 - Col2", "linha3 - Col3"],
+            ["linha4 - Col1", "linha4 - Col2", "linha4 - Col3"]
+        ]
+
+        //Acessando cada posição do Array
+        for (let i = 0; i < matriz.length; i++) {
+            for (let j = 0; j < matriz[i].length; j++) {
+                document.write(matriz[i][j],"<br>")    
+            }
+        }
+
+        //Um exemplo prático - Ordenação de um Array
+        var pizzas = [
+            ["Broto", 15, 1.5],
+            ["Pequena", 25, 2],
+            ["Média", 35, 1],
+            ["Grande", 45, 1.1]
+        ]
+
+        //Exibindo o array antes de ser ordenado 
+        for (let i = 0; i < matriz.length; i++) {
+            console.log(pizzas[i]) 
+        }
+
+        //Ordenação da Matriz com a terceira coluna de cada linha 
+        //como critério de ordenação 
+        pizzas.sort(ordena)
+
+        function ordena(a, b){
+            if (a[2] > b[2]) {
+                return 1
+            }
+            if (a[2] < b[2]) {
+                return -1
+            }
+            return 0
+        }
+
+        //Exibindo o Array após ser ordenado 
+        for (let i = 0; i < matriz.length; i++) {
+            console.log(pizzas[i]) 
+        }
+
+    </script>
+</body>
+</html>

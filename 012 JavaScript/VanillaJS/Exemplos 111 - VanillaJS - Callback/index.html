@@ -1,0 +1,68 @@
+<!--
+/********* Web Technology Development Training **************************************************
+ * Instructor  : Ivan J. Borchardt - linkedin.com/in/ivan-borchardt/
+ *                                 - github.com/Ivan-J-Borchardt
+ * Description : VanillaJS - Callback Functions
+ * Date        : 01.2021 
+ ************************************************************************************************/
+--->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <form action="">
+            <label for="idAutor"> Nome do Autor: </label>
+            <input type="text" id="idAutor" name="nmAutor">
+            <input type="submit" value="inserir" onclick="inserirAutor()"> 
+
+
+        </form>
+        <ul id="autores"></ul>
+
+        <script>
+            var autores = [{nome: "Ivan"}, {nome: "Paulo"}, {nome: "Abigail"}]; 
+
+            function teste(autor){
+                console.log("---04----");
+            }
+
+            //----------------------------------
+            function imprimirAutores(autor, callback) {
+                console.log("---03----");
+                setTimeout(function() {
+                    let saida = ''; 
+                    callback(autor);
+                    for (let i in autores) {
+                        console.log(autores[i].nome);
+                        saida += '<li>'+ autores[i].nome +'</li>'; 
+                    }
+                    document.querySelector('ul').innerHTML = saida; 
+                }, 1000); 
+            }
+
+            //----------------------------------
+            function adicionarAutor(autor, callback){
+                console.log("---02----");
+                setTimeout(function() {
+                    autores.push(autor); 
+                    callback(autor, teste); 
+                }, 2001);
+            }
+
+            //----------------------------------
+            function inserirAutor(){
+                console.log("---01----");
+                event.preventDefault();
+                let autor = {nome: document.getElementById('idAutor').value}; 
+                adicionarAutor(autor, imprimirAutores); //Passa a função imprimirAutores como parametro... 
+                //--imprimirAutores();    
+            }
+
+        </script>
+    </body>
+</html>

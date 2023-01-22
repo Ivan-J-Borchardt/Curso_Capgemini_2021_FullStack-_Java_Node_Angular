@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var matriz = [
+            ["linha1 - Col1", "linha1 - Col2", "linha1 - Col3", "linha1 - Col4"],
+            ["linha2 - Col1", "linha2 - Col2", "linha2 - Col3", "linha2 - Col4"],
+            ["linha3 - Col1", "linha3 - Col2", "linha3 - Col3", "linha3 - Col4"]
+        ]
+
+        console.log(matriz)
+        console.log(matriz[2])
+        console.log(matriz[2][1])
+
+        for (let i = 0; i < matriz.length; i++) {
+            for (let j = 0; j < matriz[i].length; j++) {
+                console.log(matriz[i][j]);
+            }
+        }
+
+        var pizzas = [
+            ["Pequena", 25, 25.00, 3.00],
+            ["Média", 35, 35.00, 2.00],
+            ["Grande", 45, 45.00, 1.00]
+
+        ]
+
+        //imprimindo o array Pizzas fora de ordem 
+        for (let i = 0; i < pizzas.length; i++) {
+            console.log(pizzas[i]);
+        }
+
+        //Ordenação da Matriz com a terceira coluna de cada linha 
+        //como critério de ordenação 
+        pizzas.sort(ordenar)
+
+        function ordenar(a, b) {
+            if (a[3] > b[3]) {
+                return 1
+            }
+            if (b[3] > a[3]) {
+                return -1
+            }
+            return 0
+
+        }
+
+        //imprimindo o array Pizzas ordenado
+        for (let i = 0; i < pizzas.length; i++) {
+            console.log(pizzas[i]);
+        }
+
+    </script>
+
+</body>
+
+</html>
