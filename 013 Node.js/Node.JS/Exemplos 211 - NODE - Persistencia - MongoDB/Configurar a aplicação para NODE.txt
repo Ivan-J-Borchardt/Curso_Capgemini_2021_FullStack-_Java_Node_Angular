@@ -1,0 +1,60 @@
+(npm - Node Package Manager)
+
+No prompt, dentro da pasta da aplicação digitar: 
+
+Verificando se o npm está instalado
+==============================================
+>npm -v 
+
+//retorna a versão no npm instalado, se instalado...
+
+
+
+Configurar o Projeto para ser um Projeto Node
+===============================================
+
+>npm init       
+
+
+Instalando o pacote Express:
+=============================================== 
+>npm install express@4.16.3 --save-exact
+
+//(versão = @4.16.3)
+
+Baixar todas as dependencias do projeto
+===============================================
+Para compartilhar o projeto, apagar a pasta nome_modules do projeto,
+dessa forma, ao instalar o projeto em outro SO, basta baixar as 
+dependencias novamente para manter a compatibilidade de SO
+
+>npm install 
+
+
+Instalando o Nodemon
+===============================================
+
+>npm install nodemon -g 
+
+//o -g significa que a instalação será global e não apenas 
+//no projeto 
+
+
+Instalando o Body Parser
+=================================================
+
+>npm install --save body-parser
+
+
+MongoDB
+================================================
+set %PATH%=%PATH%;C:\Program Files\MongoDB\Server\3.2\bin
+
+32bits: 
+
+"C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe" --storageEngine=mmapv1 --dbpath="C:\data\db"
+
+
+Mongoose
+================================================
+>npm install --save mongoose

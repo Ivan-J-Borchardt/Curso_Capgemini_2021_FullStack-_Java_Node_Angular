@@ -1,0 +1,27 @@
+https://jornadadodev.com.br/cursos/curso-de-mongodb/mongodb-aula-01#_=_
+
+show databases; 
+show collections; 
+use <nome do DB> - Cria DB/Entra no DB
+db.<nome do DB>.find() - Mostra o conteúdo da collection         
+
+try{
+    db.usuarios.insertOne({"nome":"Joao", "sobrenome":"Collin", "email":"joao.collin@gmail.com", "idade":19});
+}catch (e) {
+   print (e);
+}
+
+
+
+Erros e soluções: 
+
+Erro 1. Detected unclean  shutdown - /data/db/mongod.lock is not empty.
+
+mongod --repair
+
+
+-------------
+
+
+
+
