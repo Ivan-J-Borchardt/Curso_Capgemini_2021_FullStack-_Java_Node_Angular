@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro de Alunos</title>
+    </head>
+    <body>
+        <form action="">
+            <fieldset>
+                <legend>Cadastro de Alunos</legend>
+                <label for="idNome">Nome</label><br>
+                <input type="text" id="idNome" name="nmNome" required>
+                <br><br>
+                <label for="idSobreNome">Sobrenome</label><br>
+                <input type="text" id="idSobreNome" name="nmSobreNome" required>
+                <br><br>
+                <label for="idDataNasc">Data Nascimento</label><br>
+                <input type="date" id="idDataNasc" name="nmDataNasc" min="2000-01-01" required>
+                <br><br>
+                <label for="idEndereco">Endereço</label><br>
+                <input type="text" id="idEndereco" name="nmEndereco">
+                <br><br>
+                <label for="idNomeMae">Nome da Mãe</label><br>
+                <input type="text" id="idNomeMae" name="nmNomeMae" required>
+                <br><br>
+                <label for="idNomePai">Nome do Pai</label><br>
+                <input type="text" id="idNomePai" name="nmNomePai">
+                <br><br>
+                <label for="idEmail">E-mail</label><br>
+                <input type="email" id="idEmail" name="nmEmail" required>
+                <br><br>
+                <label for="idSerie">Série</label><br>
+                <input type="number" id="idSerie" name="nmSerie" min="1" max="9">
+                <br><br>
+                <input type="radio" id="idFeminino" name="nmSexo" checked>
+                <label for="idFeminino">Feminino</label>
+                <br>
+                <input type="radio" id="idMasculino" name="nmSexo">
+                <label for="idMasculino">Masculino</label>
+                <br><br>
+                <button type="submit">Salvar</button>
+                <button type="reset">Limpar Tela</button>
+            </fieldset>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form action="/login.php" method="POST" enctype="text/plain" target="_blank" accept-charset="UTF-8" autocomplete="on" novalidate>
+            <label for="idUser">Usuário:</label><br>
+            <input type="text" id="idUser" name="nmUser"  required>
+            <br><br>
+            <label for="idPass">Senha:</label><br>
+            <input type="password" id="idPass" name="nmPass" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$])[a-zA-Z0-9@#$]{8,15}$" required>
+            <br><br>
+            <button type="submit" id="idLogin">Login</button>
+
+            <button type="submit" id="idRecSenha"  formaction="/acessoDireto.php" formenctype="multipart/form-data" formmethod="GET" formtarget="_self" formnovalidate="formnovalidate">Login ADM</button>
+    </form>
+    
+</body>
+</html>

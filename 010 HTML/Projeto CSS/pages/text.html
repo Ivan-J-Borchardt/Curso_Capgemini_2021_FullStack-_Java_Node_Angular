@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação de Texto</title>
+
+    <style>
+        h1 {
+            background-color: black;
+            color : white;
+            text-align: center;
+            text-decoration: underline tomato;
+            text-transform: capitalize;
+        }
+
+        h2 {
+            text-align: left;
+            text-decoration: line-through tomato;
+            text-transform: lowercase;
+        }
+
+        h3 {
+            text-align: right;
+            text-decoration: overline tomato;
+            text-transform: capitalize;
+        }
+
+        #idTitSombra {
+            text-align: center;
+            text-shadow: 5px 5px 2px red;
+
+        }
+
+        p {
+            text-align: justify;
+            text-indent: 50px;
+            letter-spacing: 3px;
+            line-height: 1.8;
+            word-spacing: 10px;
+            
+        }
+
+        #idTxt {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <h1>Titulo Principal do Site </h1>
+
+    <h2>Titulo Alinhado a esquerda</h2>
+
+    <h3>Titulo alinhado a direita</h3>
+
+    <h3 id="idTitSombra">Titulo com sombra</h3>
+
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni a recusandae, sunt accusamus dicta sapiente temporibus corporis nesciunt labore? Perspiciatis vero quasi iste? Voluptate recusandae quo doloribus modi expedita quae?</p>
+
+    <p id="idTxt">exemplo de linha de texto</p>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        
+        body {
+            background-color: coral;
+        }
+
+        /* O modelo de caixa CSS é essencialmente uma caixa que envolve
+         todos os elementos HTML. Consiste em: margens, bordas, 
+         preenchimento e o conteúdo real. 
+            Content/Conteúdo - o conteúdo da caixa, onde o texto e as imagens aparecem
+            Padding/Preenchimento - limpa uma área ao redor do conteúdo. O preenchimento é transparente
+            Border/Borda - uma borda que circunda o preenchimento e o conteúdo
+            Margin/Margem - Limpa uma área fora da borda. A margem é transparente
+         */
+        .cl01, .cl02{
+            background-color: chartreuse;
+
+            border-color: darkblue;
+            border-style: dotted;
+            border-top-style: double;
+            border-radius: 45px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-width: 5px;
+
+            padding: 10px 11px 12px 13px;
+            padding-right: 0;
+            
+
+            margin: 20px;
+
+        }
+
+    </style>
+    <title>Box Model</title>
+</head>
+
+<body>
+    <header class="cl01">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus illo fuga voluptates inventore rerum
+            perspiciatis expedita quam quas quod dignissimos qui, excepturi, aliquam nulla laudantium repudiandae ipsa
+            commodi eum ratione?</p>
+    </header>
+    <main class="cl01">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique nobis repudiandae rem ipsum tempore
+            distinctio? Praesentium eius voluptates recusandae atque aperiam iusto aspernatur cumque modi quidem
+            perspiciatis, dignissimos magni aut.</p>
+    </main>
+    <footer class="cl02">
+        <p id="idP01">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam asperiores deserunt animi error
+            necessitatibus exercitationem illum nisi ab voluptatum, iure dignissimos quam unde. Vitae nemo corporis sint
+            sit ut doloribus.</p>
+    </footer>
+</body>
+
+</html>

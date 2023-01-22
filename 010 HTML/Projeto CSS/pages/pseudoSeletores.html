@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        div.divDoMeio p:first-child {
+            color: blue;
+            font-style: italic;
+        }
+
+        a:link {
+            text-decoration: none;
+            color: brown;
+        }
+
+        a:visited {
+            color: aqua; 
+        }
+
+        a:hover {
+            color: blue;
+        }
+
+        a:active {
+            color: red;
+            font-style: italic;
+        }
+        
+        a:focus {
+            color : rosybrown;
+        }
+
+        input[type=text]:focus {
+            background-color: rosybrown;
+        }
+
+        q:lang(sv) {
+            quotes:  "\201D" "\201D" "\2019" "\2019"; 
+            color:salmon; 
+        }
+
+        p:first-line {
+            font-weight: bold;
+            color:rgba(226, 94, 94, 0.541);
+        }
+
+
+        p:first-letter{
+            font-size: 2em;
+        }
+
+        div {
+            background-color: #253f34d3;
+            color: rgba(37, 63, 52, 0.575);
+
+        }
+
+        body{
+            background: rgba(0, 255, 0, 0.3);
+        }
+
+        .classe2{
+            background-color: green;
+            opacity: 0.3;
+        }
+
+        /*text-shadow: unset 5em 1em gold;*/
+    </style>
+
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" >
+    </div>
+
+    <div>
+        <p><a href="#">Primeiro parágrafo</a></p>
+        <p><a href="#3">Segundo Parágrafo</a></p>
+        <p>Terceiro Parágrafo</p>
+    </div>
+
+    <div class="divDoMeio">
+        <p><q>Primeiro</q> parágrafo</p>
+        <p>Segundo Parágrafo</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Earum harum repellendus vero! Corporis, ipsum consequuntur amet facilis animi optio nisi, nobis explicabo doloribus totam tempora et in dolores aliquid nostrum?</p>
+    </div>
+
+    <div>
+        <p>Primeiro parágrafo</p>
+        <p>Segundo Parágrafo</p>
+        <p>Terceiro Parágrafo</p>
+    </div>
+</body>
+</html>

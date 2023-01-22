@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        /* ----Seletor universal        */
+
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        /* ---- Seletor de Elementos CSS */
+
+        h1 {
+            font-size: 50px;
+        }
+
+        /* ----Seletor de Classe */
+        .tituloInterno {
+            font-size: 25px;
+            color: darkred;
+        }
+        
+        /* ----Seletor de ID */
+        #tituloParagrafos {
+            font-size: 70px;
+            color: green;
+            text-decoration: underline;
+        }
+
+        /* ----  Seletores Combinadores  ----- */
+
+        /* ---- Seletores descendentes */
+        div p {
+            color: darkgoldenrod; /*Esta regra se aplica a tags P que descendem de tag DIV*/
+        }
+
+        div.classe1 li p.formatBold {
+            font-size: 35px; /*Esta regra se aplica a tags  P da classe formatBold contido em um
+                               elemento LI que esteja contido em uma DIV cuja classe é classe1*/
+        } 
+
+        /* ---- Seletor filho */
+        li > i {
+            color: darkred; /*A regra  aplica-se a todos os elementos i 
+                                que sejam filhos de um elemento li.*/
+        }
+
+        /*Seletores irmãos adjacentes (sibling selectors) */
+        span + p {
+            color: royalblue; /*O seletor tem 
+                                 como alvo um elemento que seja irmão e adjacente ao primeiro elemento. 
+                                 Os elementos devem ter o mesmo pai e o primeiro elemento deve ser 
+                                 imediatamente anterior ao segundo. */
+        }
+
+        p ~ span {
+            color:red;
+        }
+
+    </style>
+
+    <title>MEU SITE</title>
+</head>
+
+<body>
+    <!----------------------------------->
+    <header id="idCab" >
+
+        
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Midias Sociais</a></li>
+                <li><a href="#tabelas">Tabelas</a></li>
+            </ul>
+        </nav>
+
+        <span>Este não é vermelho.</span>
+        <p>Aqui temos um parágrafo.</p>
+        <p>Aqui temos um parágrafo.</p>
+        <p>Aqui temos um parágrafo.</p>
+        <code>Aqui temos um pouco de código.</code>
+        <span>E aqui há um span vermelho!</span>
+        <code>Mais código...</code>
+      
+        <span>E este também é um span vermelho!</span>
+
+    </header>
+    <!----------------------------------->
+    <main>
+          
+        <p >
+            Paragrafo fora de qualquer div....
+        </p>
+
+        <section id="tagsHtml" class="sessoesMain"> 
+            <div>
+                <div id="divTitulos"> <!-- Títulos -->
+                    <h1>titulo 1</h1>
+                    <h2>titulo 2</h2>
+                    <h3>titulo 3</h3>
+                    <h4>titulo 4</h4>
+                    <h1 class="tituloInterno">titulo 1</h1>
+                    <h5>titulo 5</h5>
+                    <h6>titulo 6</h6>
+                </div>
+                <div> <!-- parágrafos -->
+                    <p title="paragrafo sobre nossa história">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+                        Natus autem velit, odio aut ipsam quod obcaecati quos rerum <br>
+                        officia perferendis incidunt placeat asperiores consequuntur <br>
+                        nesciunt nam vitae ratione eos illo.
+                    </p>
+                    <h1 id="tituloParagrafos" class="tituloInterno">Titulo 1</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt et alias quo magni ducimus
+                        unde, quam iusto quae porro delectus rerum in facere, maxime amet nemo, laborum animi deserunt
+                        architecto.
+                    </p>
+                </div>
+            </div>
+            <div id="tabelas"> <!-- Tabelas-->
+                <table border=1 align="right" cellspacing="10" cellpadding="10">
+                    <caption>Nota Simples</caption>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Qtd</th> 
+                            <th>Descrição</th> 
+                            <th>Preço Unitario</th> 
+                            <th>Preço Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">teste</td>
+                            <td>01</td> 
+                            <td>Lápis n1</td> 
+                            <td><center>1,00</center></td> 
+                            <td align="right">1,00</td>
+                        </tr>
+                        <tr align="right">
+                            
+                            <td>03</td> 
+                            <td>Lápis n2</td> 
+                            <td>2,00</td> 
+                            <td>6,00</td>
+                        </tr>
+                    </tbody>
+                    <tfoot> 
+                        <tr>
+                            <td colspan="4">Total</td>
+                            <td>7,00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+               
+            </div>
+
+            <div>
+                <!-- Link em uma imagem/figura -->
+                <a href="https://www.w3schools.com/html/default.asp">
+                    <figure>
+                        <img src="img/Background.png" alt="Pasta Zip" width=50 height=50 title="Clique para Zipar">
+                        <figcaption>Botao para zipar</figcaption>
+                    </figure>
+                </a>
+
+            </div>
+            <div class="classe1">
+                 <!-- link para outro site -->
+                <span>Visite o site da <a href="https://www.proway.com.br" target="_blank">proway</a></span>
+                
+                <!-- link para um bookmark da própria página-->
+                <br>
+                <span><a href="#idCab" target="_blank">Vá para o topo</a></span>
+
+                <!-- link para um bookmark de outra página-->
+                <br>
+                <span><a href="https://www.capgemini.com/br-pt/#featured-jobs">Vagas da Capgemini</a></span>
+
+                <!-- link para uma página do próprio site-->
+                <br>
+                <!-- <span><a href="pages/sobre.html">Sobre</a></span> -->
+
+                <!-- Link para E-mail-->
+                <p>
+                    Gostou de nossa proposta? entre em 
+                    <a href="mailto:ivan.borchardt.cobol@gmail.com?subject=Contato&
+                    body=estou entrando em contato...">contato</a>
+                </p>
+
+
+            </div>
+  
+            
+            <div id="idFormat" class="classe1">
+                <ol>
+                    <li>
+                        <p class="formatBold"><b>texto negrito</b></p>
+                        
+                    </li>
+                    <li>
+                        <p><strong>Texto forte</strong></p> 
+                    </li>
+                    <li>
+                        <i>texto itálico</i>
+                    </li>
+                    <li>
+                        <em>Texto enfatizado</em>
+                    </li>
+                    <li>
+                        <big>texto grande</big>
+                    </li>
+                    <li>
+                        <small>texto pequeno</small>
+                    </li>
+                    <li>
+                        <del>texto taxado</del>
+                    </li>
+                    <li>
+                        <ins>texto inserido</ins>
+                    </li>
+                    <li>
+                        <u>texto sublinhado</u>
+                    </li>
+                    <li>
+                        esse é um texto <sub>subscrito</sub>
+                    </li>
+                    <li>
+                        esse é um texto <sup>sobre escrito</sup>
+                    </li>
+
+
+                </ol>
+            </div>
+
+            <br><br><br><br>
+        </section>
+        <section class="sessoesMain">
+            <section>
+
+            </section>
+            <section>
+                <div>
+
+                </div>
+            </section>
+        </section>
+    </main>
+    <!----------------------------------->
+    <footer>
+
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+</head>
+
+<body>
+    <form action="">
+        <fieldset>
+            <legend>Deixe seu recado...</legend>
+            <input type="text" id="idNome" name="nmNome" placeholder="Nome Completo" required><br><br>
+            <input type="Email" id="idEmail" name="nmEmail" placeholder="seu@email.com"><br><br>
+            <input type="text" id="idEmpresa" name="nmEmpresa" placeholder="Empresa/Organização"><br><br>
+            <input type="text" id="idTel" name="nmTel" placeholder="Tel.: +55 (DDD) 0000-0000"><br><br>
+            <input list="idListMotivo" id="idInpMotivo" placeholder="Motivo do Contato">
+            <datalist id="idListMotivo">
+                <option value="Comercial">
+                <option value="Reclamação">
+                <option value="Sugestão">
+                <option value="Cancelamento de Assinatura">
+                <option value="Dúvida">
+                <option value="Outros">
+            </datalist><br><br>
+
+            <textarea name="nmComentario" id="idComentario"  maxlength="1000" placeholder="Deixe Seu Comentário"></textarea><br><br>
+            <button type="submit" id="idSubmit">Enviar</button>
+        </fieldset>
+    </form>
+</body>
+
+</html>
