@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: lightblue;
+            color: blue;
+        }
+
+        h1{
+            background-color: black;
+            color: white;
+            text-align: center;
+            text-decoration: overline;
+            text-transform: uppercase;
+        }
+
+        h2{
+            background-color: black;
+            color: white;
+            text-align: left;
+            text-decoration: line-through;
+            text-transform: lowercase;
+        }
+
+        h3{ /*alinhando o texto a direita e aplicando, cor de forma mais especializada*/
+            background-color: black;
+            color: white;
+            text-align: right;
+            text-decoration: underline;
+            text-transform: capitalize;
+        }       
+        
+        h4{ 
+            text-shadow: 2px 2px 3px red;
+        }
+
+        p{ /*alinhando o texto de forma justificada*/
+            text-align: justify;
+            text-indent: 50px; /*indentação do parágrafo*/
+            letter-spacing: 3px;/*espaçamento entre caracteres*/
+            line-height: 1.8; /*altura da linha*/
+            word-spacing: 10px; /*espaçamento entre palavras*/
+        }
+
+        #idtxt{ /*espelhando o texto*/
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+        
+        a{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Titulo Principal do Site</h1>
+
+    <h2>Titulo Alinhado a esquerda</h2>
+
+    <h3>Titulo Alinhado a direita</h3>
+
+    <h4>Titulo com sombra</h4>
+
+    <p><a href="#">este texto é um link</a></p>
+
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+        Nam facilis, qui ab explicabo, laboriosam ipsa sed accusamus
+         rem reiciendis unde tenetur beatae temporibus consequatur fugiat 
+         asperiores ipsum praesentium. Dolor, officia.
+    </p>
+
+    <p>
+         Nam facilis, qui ab explicabo, laboriosam ipsa sed accusamus
+          rem reiciendis unde tenetur beatae temporibus consequatur fugiat 
+          asperiores ipsum praesentium. Dolor, officia.         
+    </p>
+
+    <p id="idtxt">exemplo de linha de texto</p>
+    
+</body>
+</html>

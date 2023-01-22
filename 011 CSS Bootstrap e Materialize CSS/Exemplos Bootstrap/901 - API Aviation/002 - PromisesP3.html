@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        relogio()
+
+        function relogio() {
+            var d = new Date('2021-08-21T01:24:30');
+            var t = d.toLocaleTimeString('pt-BR', { hour12: false });
+            console.log(t); 
+
+        }
+        //setInterval(relogio, 1000);
+
+
+        /*
+    fetch("http://aviation-edge.com/v2/public/flights?key=bb8b55-171d08&limit=3&depIata=GRU")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (voo) {
+            console.log(voo);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+        */
+
+        fetch("https://weatherapi-com.p.rapidapi.com/timezone.json?q=Paris", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+                "x-rapidapi-key": "8104697aa2msh0b3c86073722a7ep13a43cjsn8f2919da9d8d"
+            }
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(rep => {
+                console.log(rep)
+            })
+            .catch(err => {
+                console.error(err);
+            });
+
+        fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q=Blumenau&days=25", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+                "x-rapidapi-key": "8104697aa2msh0b3c86073722a7ep13a43cjsn8f2919da9d8d"
+            }
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(resp => {
+                console.log(resp);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+
+    </script>
+</body>
+
+</html>
